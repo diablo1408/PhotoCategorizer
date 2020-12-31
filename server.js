@@ -1,6 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 // const Redis = require("ioredis");
+
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const visionRoute = require("./routes/vision");
