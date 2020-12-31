@@ -1,0 +1,41 @@
+html,
+body,
+header,
+.view {
+    height: 100%;
+  }
+  @media (min-width: 851px) and (max-width: 1440px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 850px;
+    }
+  }
+  @media (min-width: 800px) and (max-width: 850px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 1000px;
+    }
+  }
+  @media (min-width: 451px) and (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 1200px;
+    }
+  }
+  @media (max-width: 450px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 1400px;
+    }
+  }
+.register-page .rgba-gradient {
+  background: linear-gradient(98deg,rgba(22,91,231,.5),rgba(255,32,32,.5) 100%);
+}
