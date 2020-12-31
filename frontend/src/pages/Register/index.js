@@ -299,6 +299,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signUpandVerify: (creds) => dispatch(signUpandVerify(creds)),
     getOTP: (email) => dispatch(getOTP(email)),
+    
   };
 };
 
