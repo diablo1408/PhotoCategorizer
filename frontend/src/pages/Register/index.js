@@ -292,8 +292,9 @@ const mapStateToProps = (state) => {
   return {
     userData: state.auth.userData,
     loggedIn: state.auth.loggedIn,
-    authMessage: state.auth.authMessage,
     
+    authMessage: state.auth.authMessage,
+
   };
 };
 const mapDispatchToProps = (dispatch) => {
