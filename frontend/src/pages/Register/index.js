@@ -6,11 +6,7 @@ import "./style.css";
 import {Helmet} from "react-helmet";
 
 
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
-import "../assets/css/custom.css";
+;
 
 
 
@@ -283,7 +279,7 @@ class RegisterForm extends React.Component {
           </div>
 
 
-          
+
           </div>
          
       

@@ -1,19 +1,11 @@
 import React from "react";
 import Joi from "@hapi/joi";
 
-import "../assets/css/bootstrap.min.css";
 
-
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
 
 import _ from "lodash";
 import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
-// import Button from "../../components/common/Button";
-import "./style.css";
-import {Helmet} from 'react-helmet';
 
 class Login extends React.Component {
   state = {
