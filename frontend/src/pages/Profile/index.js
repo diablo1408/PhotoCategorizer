@@ -117,9 +117,9 @@ class Profile extends React.Component {
     const { username, email, password, otp} = this.state.data;
     const {errors} = this.state;
     console.log("user",userData.user_image);
-    if(!localStorage.getItem('loggedIn')){
-      return <Redirect to="/login" />
-  }
+    if(localStorage.getItem('loggedIn') === 'false'){
+      return <Redirect to = {"/login"} />
+    }
 
   let coverImage;
 
