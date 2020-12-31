@@ -293,13 +293,14 @@ const mapStateToProps = (state) => {
     userData: state.auth.userData,
     loggedIn: state.auth.loggedIn,
     authMessage: state.auth.authMessage,
+    
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     signUpandVerify: (creds) => dispatch(signUpandVerify(creds)),
     getOTP: (email) => dispatch(getOTP(email)),
-    
+
   };
 };
 
