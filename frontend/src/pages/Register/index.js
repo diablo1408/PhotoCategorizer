@@ -96,7 +96,7 @@ class RegisterForm extends React.Component {
     console.log(user);
     if(loggedIn){
       localStorage.setItem('loggedIn', true);
-      if(!loggedIn){  
+      if(localStorage.getItem('loggedIn') === 'true'){  
         localStorage.setItem('name',user.userData._id);
       }
     }
@@ -187,7 +187,7 @@ class RegisterForm extends React.Component {
                                     <label for="orangeForm-pass">Your password</label>
                                 </div>
 
-                                <div className="md-form">
+                                {/* <div className="md-form">
                                     <i className="fas fa-lock prefix"></i>
                                     <input
                                     name="password"
@@ -200,7 +200,7 @@ class RegisterForm extends React.Component {
                                     value = {password}
                                     />
                                     <label for="orangeForm-pass">Repeat password</label>
-                                </div>
+                                </div> */}
 
                                 {
                                   this.state.isVerify ?                       
