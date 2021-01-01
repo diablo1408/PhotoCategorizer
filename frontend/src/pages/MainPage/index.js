@@ -29,7 +29,7 @@ class MainPage extends React.Component{
             showOptions: false,
             userInput: '',
             isGenreDisplay : false,
-
+            enableName : '',
 
         };
      
@@ -54,8 +54,8 @@ onPageChange = (page) => {
 
   onOpenGenre = (e) => {
     // console.log(e.target.id);
-    this.setState({userInput : e.target.id});
-    this.setState({isGenreDisplay : true});
+    this.setState({enableName : e.target.id});
+    this.setState({isGenreDisplay : true,showOptions : false});
     this.props.getImages(e.target.id);
   }
 
@@ -117,12 +117,19 @@ changeSearchList = (e) =>{
             optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
         // console.log(filteredGenres);
-    
+        if(filteredGenres.length === 0){
+            this.setState({
+                filteredGenres : [],
+                showOptions : false,
+              });
+        }
+        else{
         this.setState({
           filteredGenres,
           showOptions: true,
           userInput
         });
+    }
 
 }
 
@@ -146,11 +153,11 @@ render(){
                 <div className="container-fluid mt-5">
                 <div className="card mb-4 wow fadeIn">
                     <div className="card-body d-sm-flex justify-content-between">
-                    <h4 className="mb-2 mb-sm-0 pt-1">
-                        {/* <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
-                        <span>/</span> */}
-                        <span>Dashboard</span>
-                    </h4>
+                        <h4 className="mb-2 mb-sm-0 pt-1">
+                            {/* <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
+                            <span>/</span> */}
+                            <span>Dashboard</span>
+                        </h4>
                     <div>
                         <form className="d-flex justify-content-center">
                             
@@ -179,7 +186,7 @@ render(){
                         <div key = {"all"} className="p-2 bd-highlight ">
                             <button type="button" 
                             className={"btn btn-outline-info waves-effect"}>
-                                {this.state.userInput}
+                                {this.state.enableName}
                             </button>
                         </div>
                     </div>
