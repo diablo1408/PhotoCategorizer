@@ -15,12 +15,12 @@ class SignUp{
             .then((user) => {
             if (user)
                 {
-                    return res.status(400).json({"msg" : "The entered Email already exist!"})}
+                    return res.status(200).json({"msg" : "The entered Email already exist!","status" : false})}
             else {  
                     //for initialise NodeMailer
                     const transporter =  initNodeMailer();
                     generateOTP(req,res,transporter);
-                    return res.status(200).json({"user" : req.body,"msg" : "OTP has been sent to your Gmail"});
+                    return res.status(200).json({"user" : req.body,"msg" : "OTP has been sent to your Gmail","status" : true});
                 }
             });
         }
