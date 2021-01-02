@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "@hapi/joi";
 import { connect } from "react-redux";
 import { getOTP, signUpandVerify } from "../../actions/authAction";
-import "./style.css";
+
 import { Helmet } from "react-helmet";
 
 
@@ -93,9 +93,11 @@ class RegisterForm extends React.Component {
 
   saveUserDetais(user, loggedIn) {
     console.log(user);
+    if(user.userData===undefined){return;}
     if (loggedIn) {
       localStorage.setItem('loggedIn', true);
       if (localStorage.getItem('loggedIn') === 'true') {
+        console.log('hello');
         localStorage.setItem('name', user.userData._id);
       }
     }

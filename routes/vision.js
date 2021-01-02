@@ -15,7 +15,8 @@ const getAllGenres = new GetAllGenres();
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-      callback(null, "./uploads/");
+      console.log("multer")
+      callback(null, "./uploads");
     },
     filename: (req, file, callback) => {
       callback(null, Date.now() + "-" + file.originalname);

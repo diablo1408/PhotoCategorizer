@@ -6,7 +6,7 @@ function resolveAll(options,onChange){
     return(
       <div>
         {/* <button class="button button5"><i class ="fas fa-button"></i></button> */}
-      <div key = {"all"} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info waves-effect"}
+      <div key = {"all"} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded waves-effect"}
           onClick = {()=> onChange ("All")}>{"All"}</button>
       </div>
       </div>
@@ -19,7 +19,7 @@ const ListGroup = props => {
   let { onChange, options } = props;
   // console.log(options);
   return ( 
-    <div className="list-group">  
+    <div className="list-group ">  
         <div className="d-flex p-2 bd-highlight mx-md-auto">
 
             {resolveAll(options,onChange)}
@@ -30,7 +30,7 @@ const ListGroup = props => {
                 if(ele.name !== "All"){
                 return(
                   
-                  <div key = {ele._id} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info waves-effect"}
+                  <div key = {ele._id} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded  waves-effect"}
                   onClick = {()=> onChange (ele.name)}>{ele.name}</button>
                   </div>
                 );
