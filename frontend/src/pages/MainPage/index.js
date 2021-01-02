@@ -154,6 +154,8 @@ class MainPage extends React.Component {
   Loading...
 </button>
 </div>
+                
+                
             {this.state.isGenreDisplay ? (
               <div className="card">
                 
@@ -183,10 +185,11 @@ class MainPage extends React.Component {
                 {!!filteredImages.length ? `${filteredImages.length} ` : "0 "}
                 Images found.
               </p>
-           
+              <hr></hr>
+            <div className="row">
               
             
-                 <hr/>
+                 
 
                   
                   {!!filteredImages ? (
@@ -202,7 +205,7 @@ class MainPage extends React.Component {
                   : (
                     <h1 className="text-white">No Images</h1>
                   )}
-                 
+                  
                 
               <br />
               <Pagination
@@ -211,7 +214,7 @@ class MainPage extends React.Component {
                 onPageChange={this.onPageChange}
                 currentPage={currentPage}
               />
-            
+            </div>
           </div>
         </main>
         <Footer />
