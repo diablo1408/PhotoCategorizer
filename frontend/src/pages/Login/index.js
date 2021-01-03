@@ -1,18 +1,12 @@
 import React from "react";
 import Joi from "@hapi/joi";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
+
 import _ from "lodash";
 import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
 // import Button from "../../components/common/Button";
 import "./style.css";
-// import {Helmet} from 'react-helmet';
+import {Helmet} from 'react-helmet';
 
 class Login extends React.Component {
   state = {
@@ -80,59 +74,52 @@ class Login extends React.Component {
     const { email, password } = data;
     const { authMessage, loggedIn,userData} = this.props;
     if (loggedIn) this.props.history.push("/dashboard");
-    // console.log("logged",loggedIn);
-    console.log("error",errors);
+    console.log("logged",loggedIn);
     return (
-        
-      <div class="login-page">
-            <div class="mask rgba-stylish-strong h-100 d-flex justify-content-center align-items-center">
-            <div class="container">
-            <div class="row">
-                <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
 
-                <div class="card wow fadeIn" data-wow-delay="0.3s">
-                    <div class="card-body">
+             <div className="bg-image-login ">
+            <div className=" d-flex h-100 justify-content-center align-items-center">
+            <div className="container">
+            <div className="row">
+                <div className="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
 
-                    <div class="form-header purple-gradient">
-                        <h3 class="font-weight-500 my-2 py-1"><i class="fas fa-user"></i> Log in:</h3>
+                <div className="card wow fadeIn" data-wow-delay="0.3s">
+                    <div className="card-body">
+
+                    <div className="form-header purple-gradient">
+                        <h3 className="font-weight-500 my-2 py-1"><i className="fas fa-user"></i> Log in</h3>
                     </div>
 
-                    {/* <div class="md-form">
-                        <i class="fas fa-user prefix white-text"></i>
-                        <input
-                         type="text" 
-                         id="orangeForm-name" 
-                         class="form-control"
-                         />
-                        <label for="orangeForm-name">Your name</label>
-                    </div> */}
+
               <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn)}>
-                    <div class="md-form">
-                        <i class="fas fa-envelope prefix white-text" style={{color:"black"}}></i>
+                    <div className="md-form">
+                        <i className="fas fa-envelope prefix " ></i>
                         <input
                         type="email"
                         name="email"
+                        error={errors["email"]}
                         id="orangeForm-email" 
-                        class="form-control"
+                        className="form-control"
                         onChange={this.handleChange}
                         value={email}
                         autoFocus
                         />
-                        <label for="orangeForm-email">Your email</label>
+                        <label htmlFor="orangeForm-email">Your email</label>
                         { errors["email"] && <div className="alert alert-danger"> {errors["email"]} </div> }
                     </div>
 
-                    <div class="md-form">
-                        <i class="fas fa-lock prefix white-text"></i>
+                    <div className="md-form">
+                        <i className="fas fa-lock prefix "></i>
                         <input
                         name="password"
                         type="password"
+                        error={errors["password"]}
                         onChange={this.handleChange}
                         value={password}
                         id="orangeForm-pass" 
-                        class="form-control"
+                        className="form-control"
                         />
-                        <label for="orangeForm-pass">Your password</label>
+                        <label htmlFor="orangeForm-pass">Your password</label>
                         { errors["password"] && <div className="alert alert-danger"> {errors["password"]} </div> }
                     </div>
 
@@ -146,23 +133,20 @@ class Login extends React.Component {
                       )}
 
 
-                    <div class="text-center">
-                        <button class="btn purple-gradient btn-lg"
-                        onClick={this.handleSubmit}>Log In</button>
-                        <div class="inline-ul text-center d-flex justify-content-center">
-                        {/* <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter white-text"></i></a>
-                        <a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin-in white-text"> </i></a>
-                        <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram white-text"> </i></a> */}
-                        <div style = {{
-                          display : "flex",
-                          flexDirection : "column"
-                        }}>
-                          <a href="http://localhost:3000/register" style={{
-                          color:"blue"}}>New User</a>
-                          <div style = {{backgroundColor: "blue",
-                                width: "70px",
-                                height: "1px"}}/>
-                        </div>
+
+                    <div className="text-center">
+                        <button className="btn purple-gradient btn-lg"
+                        onClick={this.handleSubmit}>Login</button>
+                        <div className="inline-ul text-center d-flex justify-content-center">
+
+
+                        <div className="d-flex flex-row mt-5">
+                       <span className=" text-right  mt-2  text-info">No Account?</span>
+                               <a href="http://localhost:3000/register" 
+                                > <button type="button" className="btn btn-info btn-rounded btn-sm"> Register </button></a>
+                          </div>
+
+
                     </div>
                     </div>
                   </form>
@@ -172,16 +156,13 @@ class Login extends React.Component {
                 </div>
             </div>
             </div>
-        </div>
-        {/* <Helmet>
-            <meta charSet="utf-8" />
-            <script type="text/javascript" src={"./js/jquery-3.4.1.min.js"} />
-            <script type="text/javascript" src={"./js/popper.min.js"} />
-            <script type="text/javascript" src={"./js/bootstrap.min.js"} />
-            <script type="text/javascript" src={"./js/mdb.min.js"} />
-        </Helmet> */}
 
-    </div>
+        </div>
+
+        </div>
+
+
+
     );
   }
 }

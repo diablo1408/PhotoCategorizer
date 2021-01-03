@@ -1,15 +1,8 @@
 import React from "react";
 import Joi from "@hapi/joi";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
 import { connect } from "react-redux";
 import { getOTP, updateandVerify ,userDetail,addUserImage,signOut} from "../../actions/authAction";
-import "./style.css";
+
 // import {Helmet} from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 
@@ -137,14 +130,15 @@ class Profile extends React.Component {
             <div class="sidenav-bg mask-strong"></div>
           </div>
           <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
-            <div
+            {/* <div
               style = {{fontSize: "x-large",
                 fontWeight : "400",
                 color: "blue"}}
-            >PhotoCat</div>
+            >PhotoCat</div> */}
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
               <li class="nav-item dropdown">
-                <a class="nav-link " href="http://localhost:3000/dashboard" id="userDropdown" style = {{color : "black"}}>
+             
+                <a class="nav-link " href="/dashboard" id="userDropdown" style = {{color : "black"}}>
                   <i class="fas fa-home"></i> <span class=" clearfix d-none d-sm-inline-block">Dashboard</span>
                 </a>
               </li>
@@ -203,7 +197,7 @@ class Profile extends React.Component {
                   <div class="card card-cascade narrower">
 
                     <div class="view view-cascade gradient-card-header mdb-color lighten-3">
-                      <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+                      <h5 class="mb-0 font-weight-bold">Account Details</h5>
                     </div>
                   
                     <div class="card-body card-body-cascade text-center">
@@ -213,7 +207,7 @@ class Profile extends React.Component {
 
 
                       <div class="md-form">
-                                    <i class="fas fa-user prefix set_icon"></i>
+                                  
                                     <input
                                     type = "text"
                                     name="username"
@@ -228,7 +222,7 @@ class Profile extends React.Component {
                                     <label for="orangeForm-name">Your name</label>
                                 </div>
                                 <div class="md-form">
-                                    <i class="fas fa-envelope prefix set_icon"></i>
+                                   
                                     <input
                                     name="email"
                                     id="orangeForm-email" 
@@ -243,7 +237,7 @@ class Profile extends React.Component {
                                 </div>
             
                                 <div class="md-form">
-                                    <i class="fas fa-lock prefix set_icon"></i>
+                                    
                                     <input
                                     name="password"
                                     id="orangeForm-pass" 
@@ -305,7 +299,7 @@ class Profile extends React.Component {
                                 </div>
                                 :
                                   <div class="text-center"> 
-                                  <button class="btn btn-indigo btn-rounded mt-5"                 
+                                  <button class="btn btn-info btn-lg btn-rounded mt-5"                 
                                   type="button"
                                   onClick={this.handleSubmit}
                                   >Update</button>
@@ -320,13 +314,7 @@ class Profile extends React.Component {
             </section>
           </div>
           </main>
-        {/* <Helmet>
-            <meta charSet="utf-8" />
-            <script type="text/javascript" src={"./js/jquery-3.4.1.min.js"} />
-            <script type="text/javascript" src={"./js/popper.min.js"} />
-            <script type="text/javascript" src={"./js/bootstrap.min.js"} />
-            <script type="text/javascript" src={"./js/mdb.min.js"} />
-        </Helmet> */}
+      
     </div> 
     );
   }

@@ -186,7 +186,7 @@ class MainPage extends React.Component {
                 Images found.
               </p>
               <hr></hr>
-            <div className="row">
+           
               
             
                  
@@ -214,7 +214,7 @@ class MainPage extends React.Component {
                 onPageChange={this.onPageChange}
                 currentPage={currentPage}
               />
-            </div>
+            
           </div>
         </main>
         <Footer />

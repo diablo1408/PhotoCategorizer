@@ -15,20 +15,7 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
-    // const fpath = "/assets/";
-    // let scripts = [
-    //     "js/jquery-3.4.1.min.js"
-    //     // "js/popper.min.js",
-    //     // "js/bootstrap.min.js",
-    //     // "js/mdb.min.js",
-    //     // "js/dropdown_label_select.js",
-    // ];
-    // for(let i = 0;i<scripts.length ;i++){
-    //     const script = scripts[i];
-    //     appendScript(fpath + script);
-    // }
-
-    this.props.userDetail();
+   this.props.userDetail();
   }
 
   LogOut = () => {
@@ -130,7 +117,6 @@ class Header extends React.Component {
           <div className="list-group list-group-flush">
             <a href="#" className="list-group-item active waves-effect">
               <i className="far fa-images mr-3"></i>Photos
-            
             </a>
             {/* <a href="http://localhost:3000/profile" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-user mr-3"></i>Profile</a> */}

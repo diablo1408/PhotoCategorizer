@@ -3,7 +3,14 @@ import Joi from "@hapi/joi";
 import { connect } from "react-redux";
 import { getOTP, signUpandVerify } from "../../actions/authAction";
 import "./style.css";
+import {Helmet} from "react-helmet";
 
+
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/mdb.lite.min.css";
+import "../assets/css/mdb.min.css";
+import "../assets/css/style.min.css";
+import "../assets/css/custom.css";
 
 
 
@@ -14,7 +21,7 @@ class RegisterForm extends React.Component {
       username:"",
       email: "",
       password: "",
-      otp :""
+      otp : "",
     },
     isVerify : false,
     errors: {},
@@ -54,19 +61,19 @@ class RegisterForm extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(this.props.status);
+     
       this.props.getOTP(this.state.data.email);
     };
 
   handleVerify = (e) =>{
     e.preventDefault();
+    // console.log(this.state.data,"verfiy");
 
     if((this.state.data.username !== "") && 
       (this.state.data.email !== "") && 
       (this.state.data.username !== "") &&
       (this.state.data.otp !== "")){
-        const {username, password, email} = this.state.data;
-        const {otp} = this.state.data;
+        const {username, password, email ,otp} = this.state.data;
         this.props.signUpandVerify({username, email, password ,otp});
       }
   }
@@ -80,156 +87,107 @@ class RegisterForm extends React.Component {
   schema = {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
-    password: Joi.string().min(5).required().label("Password"),
+    password: Joi.string().min(8).required().label("Password"),
     otp: (this.state.isVerify === false) ? "" : Joi.string().min(6).max(6),
   };
 
 
   saveUserDetais(user,loggedIn,authMessage){
-    console.log("hi",authMessage,user);
-    console.log("hi",loggedIn);
-
     if(authMessage !== '' && authMessage !== undefined){return;}
-    console.log("hiiii",user.userData);
+   // console.log("hiiii",user.userData);
+   // console.log(user);
     if(user.userData === undefined){return;}
-    
-    
     if(loggedIn){
       localStorage.setItem('loggedIn', true);
-      if(localStorage.getItem('loggedIn') === 'true'){  
+      if(localStorage.getItem('loggedIn')==='true'){  
         localStorage.setItem('name',user.userData._id);
       }
     }
   }
 
   render() {
-    
     if(this.props.status === true && this.state.isVerify === false){
       this.setState({isVerify : true});
     }
     const { authMessage,userData ,loggedIn } = this.props;
+    // console.log(loggedIn);
     const { errors, authError } = this.state;
-    const { username, email, password,otp} = this.state.data;
+    const { username, email, password, otp} = this.state.data;
     if (loggedIn) this.props.history.push("/dashboard");
 
     return (
-        <div class="register-page">
-          <div class="mask rgba-gradient">
-            <div class="container h-100 d-flex justify-content-center align-items-center">
-    
-              <div class="row pt-5">
-    
-                <div class="col-md-12">
-    
-                  <div class="card">
-                    <div class="card-body">
-    
-                      <h2 class="font-weight-bold my-4 text-center mb-5 mt-4 font-weight-bold">
-                        <strong>REGISTER</strong>
-                      </h2>
-                      
-    
-                      <div class="row mt-5">
-    
-                        <div class="col-md-6 ml-lg-5 ml-md-3">
-    
-                          {/* <div class="row pb-4">
-                            <div class="col-2 col-lg-1">
-                              <i class="fas fa-university indigo-text fa-lg"></i>
-                            </div>
-                            <div class="col-10">
-                              <h4 class="font-weight-bold mb-4">
-                                <strong>Safety</strong>
-                              </h4>
-                              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam
-                                minima assumenda deleniti hic.</p>
-                            </div>
-                          </div> */}
-                          {/* <div class="row pb-4">
-                            <div class="col-2 col-lg-1">
-                              <i class="fas fa-desktop deep-purple-text fa-lg"></i>
-                            </div>
-                            <div class="col-10">
-                              <h4 class="font-weight-bold mb-4">
-                                <strong>Technology</strong>
-                              </h4>
-                              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam
-                                minima assumenda deleniti hic.</p>
-                            </div>
-                          </div> */}
-                          <div class="row pb-4">
-                            <div class="col-2 col-lg-1">
-                              {/* <i class="far fa-money-bill-alt purple-text fa-lg"></i> */}
-                            </div>
-                            <div class="col-10">
-                              {/* <h4 class="font-weight-bold mb-4">
-                                <strong>Finance</strong>
-                              </h4> */}
-                              {/* <p class="">PhotoCAT is a Image Categorizor/ Image Search engine which help users to sort his/her images in certain categories which makes it simple for the users to find specific picture or a collection of pictures according to their needs.</p> */}
-                            </div>
-                          </div>
+        <div >
+          <div className="bg-image-register ">
+            <div className="container h-100 d-flex justify-content-center align-items-center">
+
+              <div className="row pt-5">
+
+                <div className="col-md-12">
+
+                  <div className="card">
+                    <div className="card-body">
+                    <div className="form-header purple-gradient">
+                        <h3 className="font-weight-500 my-2 py-1"><i className="fas fa-user"></i> Register</h3>
+                    </div>
+                      {/* <h2 className="font-weight-bold my-4 text-center mb-2 mt-2 font-weight-bold">
+                        <strong>Register</strong>
+                      </h2> */}
+
+
+
+                      <div className="">
+                        <div className="d-flex flex-row-reverse">
+                        <a href="http://localhost:3000/login" 
+                            > <button type="button" className="btn btn-info btn-rounded btn-sm">SignIn</button></a>
+                          <span className=" text-right mt-2 text-info">Already member?</span>
+
+
                         </div>
-                        <div class="col-md-5">
-                          <div class="row pb-4 d-flex justify-content-center mb-4">
-    
-                            <h4 class="mt-3 mr-4">
-                              <strong>Register with</strong>
-                            </h4>
-    
-                            {/* <div class="inline-ul text-center d-flex justify-content-center">
-                              <a class="p-2 m-2 fa-lg tw-ic">
-                                <i class="fab fa-twitter fa-lg indigo-text"></i>
-                              </a>
-                              <a class="p-2 m-2 fa-lg li-ic">
-                                <i class="fab fa-linkedin-in fa-lg indigo-text"> </i>
-                              </a>
-                              <a class="p-2 m-2 fa-lg ins-ic">
-                                <i class="fab fa-instagram fa-lg indigo-text"> </i>
-                              </a>
-                            </div> */}
-    
-                            <h4 class="mt-3 ml-4">
-                              <strong>or:</strong>
-                            </h4>
-    
-                          </div>
+
+
+
+                        <div className="">
+
                           <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn,authMessage)}>
 
 
-                                <div class="md-form">
-                                    <i class="fas fa-user prefix"></i>
+                                <div className="md-form">
+                                    <i className="fas fa-user prefix"></i>
                                     <input
                                     type = "text"
                                     name="username"
                                      id="orangeForm-name" 
-                                    class="form-control"
+                                    className="form-control"
+                                    error={errors["username"]}
                                     onChange={this.handleChange}
                                     value = {username}
                                     />
                                     <label for="orangeForm-name">Your name</label>
                                     { errors["username"] && <div className="alert alert-danger"> {errors["username"]} </div> }
                                 </div>
-                                <div class="md-form">
-                                    <i class="fas fa-envelope prefix"></i>
+                                <div className="md-form">
+                                    <i className="fas fa-envelope prefix"></i>
                                     <input
                                     name="email"
                                     id="orangeForm-email" 
-                                    class="form-control"
+                                    className="form-control"
                                     type="email"
+                                    error={errors["email"]}
                                     onChange={this.handleChange}
                                     value = {email}
                                     />
                                     <label for="orangeForm-email">Your email</label>
                                     { errors["email"] && <div className="alert alert-danger"> {errors["email"]} </div> }
                                 </div>
-            
-                                <div class="md-form">
-                                    <i class="fas fa-lock prefix"></i>
+
+                                <div className="md-form">
+                                    <i className="fas fa-lock prefix"></i>
                                     <input
                                     name="password"
                                     id="orangeForm-pass" 
-                                    class="form-control"
+                                    className="form-control"
                                     type="password"
+                                  
                                     onChange={this.handleChange}
                                     // label="password"
                                     value = {password}
@@ -238,15 +196,18 @@ class RegisterForm extends React.Component {
                                     { errors["password"] && <div className="alert alert-danger"> {errors["password"]} </div> }
                                 </div>
 
+                                
+
                                 {
                                   this.state.isVerify ?                       
-                                      <div class="md-form">
-                                        <i class="fas fa-key prefix"></i>
+                                      <div className="md-form">
+                                        <i className="fas fa-key prefix"></i>
                                         <input
                                         type = "text"
                                         name="otp"
                                         id="orangeForm-otp" 
-                                        class="form-control"
+                                        className="form-control"
+                                    
                                         onChange={this.handleChange}
                                         value = {otp}
                                         />
@@ -257,7 +218,7 @@ class RegisterForm extends React.Component {
                                 }
 
 
-                                {authMessage? (
+                                {authMessage ? (
                                 <p className="bg-info text-white">
                                 {" "}
                                 {authMessage}
@@ -269,49 +230,44 @@ class RegisterForm extends React.Component {
                                   this.state.isVerify
                                 ?
                                 <div style = {{display : "flex"}}>
-                                  <div class="text-center"> 
-                                  <button class="btn btn-indigo btn-rounded mt-5"                 
+                                  <div className="text-center"> 
+                                  <button className="btn btn-indigo btn-rounded mt-5"                 
                                   type="button"
                                   onClick={this.handleVerify}
                                   >Verify</button>
                                   </div> 
-                                  
-                                  <div class="text-center"> 
-                                  <button class="btn btn-indigo btn-rounded mt-5"                 
+
+                                  <div className="text-center"> 
+                                  <button className="btn btn-indigo btn-rounded mt-5"                 
                                   type="button"
                                   onClick={this.handleResend}
                                   >Resend</button>
                                   </div>  
                                 </div>
                                 :
-                                  <div class="text-center"> 
-                                  <button class="btn btn-indigo btn-rounded mt-5"                 
+                                  <div className="text-center"> 
+                                  <button className="btn purple-gradient mt-3 btn-lg"                 
                                   type="button"
                                   disabled = {this.validate()}
                                   onClick={this.handleSubmit}
                                   >Sign up</button>
                                   </div>
-                              
+
                                 }
 
-                                  
+
 
                         </form>
                         </div>
-                       
-                        <div style = {{
-                          display : "flex",
-                          flexDirection : "column"
-                        }}>
-                          <a href="http://localhost:3000/login" style={{
-                            marginLeft : "525px",color:"blue"
-                            }}>I'm already a member</a>
-                          <div style = {{backgroundColor: "blue",
+
+
+
+                          <div style = {{
                                 width: "154px",
                                 height: "1px",
-                                marginLeft : "525px"}}/>
-                        </div>
-                        
+                                marginLeft : "256px"}}/>
+
+
                       </div>
                     </div>
                 </div>
@@ -319,8 +275,10 @@ class RegisterForm extends React.Component {
             </div>
           </div>
           </div>
+
+
       </div>
-     
+
     );
   }
 }
@@ -340,4 +298,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
-

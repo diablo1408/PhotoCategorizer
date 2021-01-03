@@ -64,16 +64,7 @@ class MultiDropDown extends React.Component{
                     <form className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                       
-                    <a className="dropdown-item">
-                        <div className="custom-control custom-checkbox"
-                        >
-                        <input type="checkbox" className="custom-control-input" id="checkbox1" name = {"All"}
-                        onChange = {this.onChangeCheck}
-                        />
-
-                        <label className="custom-control-label" htmlFor="checkbox1">All</label>
-                        </div>
-                    </a>
+                   
                     {   
                         genres.map((ele)=>{
                             return(

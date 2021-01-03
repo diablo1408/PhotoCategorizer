@@ -21,7 +21,7 @@ export default function ImageTable({ images, currentPage, pageSize, genre }) {
             "base64"
           );
           const coverImage = "data:image/jpeg;base64," + encodedImage;
-         return( <div className="col-3  ">
+         return( <div className="col-4  ">
                 <img src={coverImage} className="gallery-img" alt={"cover"} />
          </div>
             
