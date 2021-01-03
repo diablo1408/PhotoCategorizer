@@ -14,11 +14,11 @@ class RegisterForm extends React.Component {
       username:"",
       email: "",
       password: "",
-      otp : "",
+      otp :""
     },
     isVerify : false,
     errors: {},
-    passwordError: "",
+    authError: "",
   };
 
   validateProperty = (input) => {
@@ -54,23 +54,19 @@ class RegisterForm extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-      if((this.state.data.username !== "") && 
-        (this.state.data.email !== "") && 
-        (this.state.data.username !== "")){
-            this.setState({isVerify : true});
-      }
+    // console.log(this.props.status);
       this.props.getOTP(this.state.data.email);
     };
 
   handleVerify = (e) =>{
     e.preventDefault();
-    // console.log(this.state.data,"verfiy");
 
     if((this.state.data.username !== "") && 
       (this.state.data.email !== "") && 
       (this.state.data.username !== "") &&
       (this.state.data.otp !== "")){
-        const {username, password, email ,otp} = this.state.data;
+        const {username, password, email} = this.state.data;
+        const {otp} = this.state.data;
         this.props.signUpandVerify({username, email, password ,otp});
       }
   }
@@ -84,19 +80,22 @@ class RegisterForm extends React.Component {
   schema = {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
-    password: Joi.string().min(8).required().label("Password"),
-    otp: Joi.string().min(6).max(6),
+    password: Joi.string().min(5).required().label("Password"),
+    otp: (this.state.isVerify === false) ? "" : Joi.string().min(6).max(6),
   };
 
 
-  saveUserDetais(user,loggedIn){
-    // console.log(user);
+  saveUserDetais(user,loggedIn,authMessage){
+    console.log("hi",authMessage,user);
+    console.log("hi",loggedIn);
 
+    if(authMessage !== '' && authMessage !== undefined){return;}
+    console.log("hiiii",user.userData);
     if(user.userData === undefined){return;}
-
+    
+    
     if(loggedIn){
       localStorage.setItem('loggedIn', true);
-      console.log(user);
       if(localStorage.getItem('loggedIn') === 'true'){  
         localStorage.setItem('name',user.userData._id);
       }
@@ -104,10 +103,13 @@ class RegisterForm extends React.Component {
   }
 
   render() {
+    
+    if(this.props.status === true && this.state.isVerify === false){
+      this.setState({isVerify : true});
+    }
     const { authMessage,userData ,loggedIn } = this.props;
-    // console.log(loggedIn);
-    const { errors, passwordError } = this.state;
-    const { username, email, password, otp} = this.state.data;
+    const { errors, authError } = this.state;
+    const { username, email, password,otp} = this.state.data;
     if (loggedIn) this.props.history.push("/dashboard");
 
     return (
@@ -191,7 +193,7 @@ class RegisterForm extends React.Component {
                             </h4>
     
                           </div>
-                          <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn)}>
+                          <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn,authMessage)}>
 
 
                                 <div class="md-form">
@@ -201,11 +203,11 @@ class RegisterForm extends React.Component {
                                     name="username"
                                      id="orangeForm-name" 
                                     class="form-control"
-                                    error={errors["username"]}
                                     onChange={this.handleChange}
                                     value = {username}
                                     />
                                     <label for="orangeForm-name">Your name</label>
+                                    { errors["username"] && <div className="alert alert-danger"> {errors["username"]} </div> }
                                 </div>
                                 <div class="md-form">
                                     <i class="fas fa-envelope prefix"></i>
@@ -214,11 +216,11 @@ class RegisterForm extends React.Component {
                                     id="orangeForm-email" 
                                     class="form-control"
                                     type="email"
-                                    error={errors["email"]}
                                     onChange={this.handleChange}
                                     value = {email}
                                     />
                                     <label for="orangeForm-email">Your email</label>
+                                    { errors["email"] && <div className="alert alert-danger"> {errors["email"]} </div> }
                                 </div>
             
                                 <div class="md-form">
@@ -228,12 +230,12 @@ class RegisterForm extends React.Component {
                                     id="orangeForm-pass" 
                                     class="form-control"
                                     type="password"
-                                    error={errors["password"]}
                                     onChange={this.handleChange}
                                     // label="password"
                                     value = {password}
                                     />
                                     <label for="orangeForm-pass">Your password</label>
+                                    { errors["password"] && <div className="alert alert-danger"> {errors["password"]} </div> }
                                 </div>
 
                                 {
@@ -245,7 +247,6 @@ class RegisterForm extends React.Component {
                                         name="otp"
                                         id="orangeForm-otp" 
                                         class="form-control"
-                                        error={errors["otp"]}
                                         onChange={this.handleChange}
                                         value = {otp}
                                         />
@@ -256,10 +257,10 @@ class RegisterForm extends React.Component {
                                 }
 
 
-                                {authMessage || passwordError ? (
+                                {authMessage? (
                                 <p className="bg-info text-white">
                                 {" "}
-                                {authMessage} {passwordError}
+                                {authMessage}
                                 </p>
                                 ) : (
                                 <> </>
@@ -286,6 +287,7 @@ class RegisterForm extends React.Component {
                                   <div class="text-center"> 
                                   <button class="btn btn-indigo btn-rounded mt-5"                 
                                   type="button"
+                                  disabled = {this.validate()}
                                   onClick={this.handleSubmit}
                                   >Sign up</button>
                                   </div>
@@ -317,14 +319,6 @@ class RegisterForm extends React.Component {
             </div>
           </div>
           </div>
-          {/* <Helmet>
-              <meta charSet="utf-8" />
-              <script type="text/javascript" src={"./js/jquery-3.4.1.min.js"} />
-              <script type="text/javascript" src={"./js/popper.min.js"} />
-              <script type="text/javascript" src={"./js/bootstrap.min.js"} />
-              <script type="text/javascript" src={"./js/mdb.min.js"} />
-          </Helmet> */}
-      
       </div>
      
     );
@@ -335,6 +329,7 @@ const mapStateToProps = (state) => {
     userData: state.auth.userData,
     loggedIn: state.auth.loggedIn,
     authMessage: state.auth.authMessage,
+    status: state.auth.status
   };
 };
 const mapDispatchToProps = (dispatch) => {
