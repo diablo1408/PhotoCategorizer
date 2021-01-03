@@ -1,13 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addImage } from "../../actions/imageAction";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
+
 import { getImages } from "../../actions/imageAction";
 
 class FileUpload extends React.Component{

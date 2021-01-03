@@ -1,11 +1,4 @@
 import React from "react";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
 import { connect } from "react-redux";
 import { downloadGenres, getGenres } from "../../actions/imageAction";
 class MultiDropDown extends React.Component{

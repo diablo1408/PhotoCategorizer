@@ -1,12 +1,5 @@
 import React from "react";
 import img from "../assets/img/avatar-icon-images-4.jpg";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
 import FileUpload from "./file_upload";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -136,7 +129,8 @@ class Header extends React.Component {
           </a>
           <div className="list-group list-group-flush">
             <a href="#" className="list-group-item active waves-effect">
-              <i className="fas fa-chart-pie mr-3"></i>Photos
+              <i className="far fa-images mr-3"></i>Photos
+            
             </a>
             {/* <a href="http://localhost:3000/profile" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-user mr-3"></i>Profile</a> */}

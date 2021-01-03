@@ -161,7 +161,7 @@ class Profile extends React.Component {
           <div class="container-fluid">
 
             <section class="section">
-              <div class="row">
+              <div class="rowp">
                 <div class="col-lg-4 mb-4">
 
                   <div class="card card-cascade narrower">
@@ -174,7 +174,7 @@ class Profile extends React.Component {
                         width: "75%",height: "56%"}} 
                         alt="User Photo" class="z-depth-1 mb-3 mx-auto" />
 
-                      <div class="row flex-center">
+                      <div class="rowp flex-center">
                       <input
                           id = "user_input_file"
                           name="image_input_file"

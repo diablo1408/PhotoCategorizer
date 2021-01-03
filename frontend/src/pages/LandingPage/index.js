@@ -1,13 +1,6 @@
 import React from "react";
 import "./style.css";
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
-// import {Helmet} from "react-helmet";
+
 class LandingPage extends React.Component{
     state = {
         clicked : false,

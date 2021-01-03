@@ -3,15 +3,7 @@ import Joi from "@hapi/joi";
 import { connect } from "react-redux";
 import { getOTP, signUpandVerify } from "../../actions/authAction";
 import "./style.css";
-// import {Helmet} from "react-helmet";
 
-import "../assets/css/bootstrap.css";
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.css";
-import "../assets/css/mdb.lite.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
 
 
 
