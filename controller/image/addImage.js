@@ -23,7 +23,7 @@ class AddImage {
     // console.log(user);
 
     let features = await get_features(element.path);
-    let feature_list = features.slice(0,5);
+    let feature_list = features.slice(0,10);
     await this.getStuff(element.path).then(async(data)=>{
 
       let image_mapping = user[0].image;

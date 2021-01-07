@@ -1,11 +1,11 @@
 import React from 'react';
-import "./style.css";
+
 
 function resolveAll(options,onChange){
   if(options){
     return(
       <div>
-        {/* <button class="button button5"><i class ="fas fa-button"></i></button> */}
+       
       <div key = {"all"} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded waves-effect"}
           onClick = {()=> onChange ("All")}>{"All"}</button>
       </div>

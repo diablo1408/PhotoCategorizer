@@ -10,7 +10,7 @@ class DownLoad {
             //mke folder of given genre
             let FS_MKDIR = util.promisify(fs.mkdir);
             try{
-                await FS_MKDIR(path.join("/home/utsav/Desktop", genre))
+                await FS_MKDIR(path.join("C:/Users/shubham/Desktop/", genre))
                 .then((user) => {
                     console.log('Directory created successfully!')
                 }) 
@@ -31,7 +31,7 @@ class DownLoad {
 
                 let FS_WRITEFILE = util.promisify(fs.writeFile);
                 try{
-                    await FS_WRITEFILE(path.join("/home/utsav/Desktop/"+genre,img_name), img_buffer,"base64")
+                    await FS_WRITEFILE(path.join("C:/Users/shubham/Desktop/"+genre,img_name), img_buffer,"base64")
                     .then(() => {
                         // console.log('file saved to ', img_name)
                     })
@@ -43,7 +43,7 @@ class DownLoad {
     }
 
   handleRequest(req, res) {
-    //   console.log(req)
+       console.log(req)
     const user_id = req.params.user_id;
     const genreList = req.params.genres.split(',');
     console.log(user_id,genreList);
