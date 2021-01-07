@@ -30,7 +30,7 @@ export const addImage = (img) => {
 
 
 
-  console.log("imageList",img);
+  // console.log("imageList",img);
 
   let formData = new FormData();
   // formData.append("path",Date.now() + "-" + img.name);

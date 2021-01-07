@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const path = require('path');
 
 const {GetAllImage} = require('../controller/image/getAllImage');
 const {AddImage} = require('../controller/image/addImage');

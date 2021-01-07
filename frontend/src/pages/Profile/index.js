@@ -5,14 +5,15 @@ import { getOTP, updateandVerify ,userDetail,addUserImage,signOut} from "../../a
 
 // import {Helmet} from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-
+// import path from '../../../uploads/';
 class Profile extends React.Component {
   state = {
     data: {
       username:"",
       email: "",
-      password: "",
       otp : "",
+      password: "",
+      currentpassword : ""
     },
     errors: {},
     isVerify : false,
@@ -30,6 +31,7 @@ class Profile extends React.Component {
 
   validateProperty = (input) => {
     const { name, value } = input;
+    // console.log(name,value);
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
@@ -72,8 +74,8 @@ class Profile extends React.Component {
       }
       else{
         // console.log("ehrbfuehbf");
-        const {username, password, email ,otp} = this.state.data;
-        this.props.updateandVerify({username, email, password ,otp});
+        const {username, password, email,currentpassword ,otp} = this.state.data;
+        this.props.updateandVerify({username, email, password,currentpassword ,otp});
       }
     };
 
@@ -100,6 +102,7 @@ class Profile extends React.Component {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
     password: Joi.string().min(8).required().label("Password"),
+    currentpassword: Joi.string().min(8).required().label("Password"),
     otp: Joi.string().min(6).max(6),
   };
 
@@ -107,21 +110,28 @@ class Profile extends React.Component {
   render() {
     
     const { authMessage,userData} = this.props;
-    const { username, email, password, otp} = this.state.data;
+    const { username, email,otp,password,currentpassword} = this.state.data;
     const {errors} = this.state;
     // console.log("user",userData);
     if(localStorage.getItem('loggedIn') === 'false'){
       return <Redirect to = {"/login"} />
   }
 
-  let coverImage;
+  let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
+  // console.log("hishfsdjfi",userData);
+  // if(userData.user_image !== undefined){
+  //   coverImage = "/images/" + userData.user_image;
+    // console.log(userData);
+    console.log(this.state.userData);
+  if(this.state.userData !== undefined){
+    const encodedImage = new Buffer(userData.user_image, "binary").toString(
+      "base64"
+    );
+    coverImage = "data:image/jpeg;base64," + encodedImage;
+  }
 
-        if(userData.user_image !== undefined){
-            const encodedImage = new Buffer(userData.user_image, "binary").toString("base64");
-            coverImage = "data:image/jpeg;base64," + encodedImage;
-        }
-        if(coverImage === "data:image/jpeg;base64,"){coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";}
-    return (
+  
+  return (
         <div>
           <header>
 
@@ -192,6 +202,7 @@ class Profile extends React.Component {
                 
                 </div>
                 
+                <div className = {"align-user-details"} style = {{display : "contents"}}>
                 <div class="col-lg-8 mb-4">
 
                   <div class="card card-cascade narrower">
@@ -236,7 +247,7 @@ class Profile extends React.Component {
                                     <label for="orangeForm-email">Your email</label>
                                 </div>
             
-                                <div class="md-form">
+                                {/* <div class="md-form">
                                     
                                     <input
                                     name="password"
@@ -249,7 +260,7 @@ class Profile extends React.Component {
                                     value = {password}
                                     />
                                     <label for="orangeForm-pass">Your password</label>
-                                </div>
+                                </div> */}
 
                                 {
                                   this.state.isVerify ?                       
@@ -310,6 +321,72 @@ class Profile extends React.Component {
                     </div>
                   </div>
                 </div>
+
+                <div class="col-lg-8 mb-4">
+
+                    <div class="card card-cascade narrower">
+
+                      <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                        <h5 class="mb-0 font-weight-bold">Change password</h5>
+                      </div>
+
+                      <div class="card-body card-body-cascade text-center">
+
+                        <form onSubmit={this.handleSubmit}>
+
+                                  <div class="md-form pass">
+                                      
+                                      <input
+                                      name="password"
+                                      id="orangeForm-pass" 
+                                      class="form-control pass"
+                                      type="password"
+                                      onChange={this.handleChange}
+                                      value = {password}
+                                      />
+                                      <label for="orangeForm-pass">Current password</label>
+                                  </div>
+                                  <div class="md-form repass">
+                                      
+                                      <input
+                                      name="currentpassword"
+                                      id="orangeForm-repass" 
+                                      class="form-control repass"
+                                      type="password"
+                                      onChange={this.handleChange}
+                                      value = {currentpassword}
+                                      />
+                                      <label for="orangeForm-repass">New password</label>
+                                  </div>
+
+                                  {authMessage ? (
+                                  <p className="bg-info text-white">
+                                  {" "}
+                                  {authMessage}
+                                  </p>
+                                  ) : (
+                                  <> </>
+                                  )}
+
+                                    <div class="text-center"> 
+                                    <button class="btn btn-info btn-lg btn-rounded mt-5"                 
+                                    type="button"
+                                    onClick={this.handleSubmit}
+                                    >Update</button>
+                                    </div>
+                                
+                                  
+                        </form>
+                      </div>
+                    </div>
+                    </div>
+                  
+
+                </div>
+
+
+
+
               </div>
             </section>
           </div>

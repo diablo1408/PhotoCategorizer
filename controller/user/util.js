@@ -28,8 +28,8 @@ function generateOTP(req,res,transporter){
     
     var otp = otpGenerator.generate(6, { alphabets : false,specialChars : false,upperCase : false });
     //  console.log(otp);
-     // set otp in redis (with email as key) with expiration time(1 mins)
-     redis.set(email,otp,'PX',60000);
+     // set otp in redis (with email as key) with expiration time(5 min)
+     redis.set(email,otp,'PX',300000);
 
     //Before sending a mail given link option will be TRUE 
     //of those gmail account by which you send a message
@@ -44,7 +44,7 @@ function generateOTP(req,res,transporter){
         // html: `<b>Hello Dear User, we are happy that you join our family. Kind Regards, PhotoCat Team.</b>`,
         html : "<h3>OTP for account verification is </h3>"  + 
         "<h1 style='font-weight:bold;'>" + otp +"</h1>" + 
-        "<br/><div>*OTP will expire in 1 minute</div>",
+        "<br/><div>*OTP will expire in 5 minute</div>",
         // text: 'OTP will expire in 1 minute',
     })
     .then((info) => console.log("Email has been sent!"))

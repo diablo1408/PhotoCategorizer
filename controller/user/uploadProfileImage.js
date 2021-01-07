@@ -7,7 +7,6 @@ class UploadProfileImage {
   
   handleRequest(req, res) {
       // console.log(req.body); 
-      
       let FS_READFILE = util.promisify(fs.readFile); 
       try{
       FS_READFILE(req.file.path)
@@ -16,6 +15,8 @@ class UploadProfileImage {
           User.updateOne({_id : user_id},{ 
               $set: { "user_image" : data}
           }).then((user)=>{
+            console.log(req.file.filename);
+
             return res.status(200).json({"user_image" : data,msg : "Profile Image Updated"}); 
           });
       });

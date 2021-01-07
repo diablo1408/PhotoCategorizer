@@ -1,6 +1,5 @@
 import React from "react";
-
-
+import "./style.css";
 
 export default function ImageTable({ images, currentPage, pageSize, genre }) {
   // console.log("genreimages");
@@ -20,12 +19,10 @@ export default function ImageTable({ images, currentPage, pageSize, genre }) {
             "base64"
           );
           const coverImage = "data:image/jpeg;base64," + encodedImage;
-         return( <div className="col-4 ">
-                <img src={coverImage} className="gallery-img" alt={"cover"} />
-         </div>
-            
-             
-            
+          // const coverImage = "/uploads/" + image.img_name;
+         return( <div className="col-4  " key = {image._id}>
+                <img src={coverImage} className="gallery-img" alt={"cover"} key = {image._id}/>
+                </div>
           )
         })}
        

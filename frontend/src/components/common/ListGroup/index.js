@@ -1,12 +1,18 @@
 import React from 'react';
 
-
-function resolveAll(options,onChange){
+function resolveAll(options,onChange,active){
   if(options){
     return(
       <div>
-       
-      <div key = {"all"} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded waves-effect"}
+        {/* <button class="button button5"><i class ="fas fa-button"></i></button> */}
+      <div key = {"all"} className="p-2 bd-highlight "><button type="button" 
+      className={
+        "btn"
+        + 
+        ("All" === active ? " btn-info" : " btn-outline-info")
+        +
+        " btn-rounded waves-effect"
+      }
           onClick = {()=> onChange ("All")}>{"All"}</button>
       </div>
       </div>
@@ -16,13 +22,13 @@ function resolveAll(options,onChange){
 }
 
 const ListGroup = props => {
-  let { onChange, options } = props;
+  let { onChange, options,active } = props;
   // console.log(options);
   return ( 
     <div className="list-group ">  
         <div className="d-flex p-2 bd-highlight mx-md-auto">
 
-            {resolveAll(options,onChange)}
+            {resolveAll(options,onChange,active)}
         
             {
               options && options.map((ele)=>{
@@ -30,7 +36,14 @@ const ListGroup = props => {
                 if(ele.name !== "All"){
                 return(
                   
-                  <div key = {ele._id} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded  waves-effect"}
+                  <div key = {ele._id} className="p-2 bd-highlight "><button type="button" 
+                  className={
+                    "btn"
+                    +
+                     " btn-outline-info"
+                    +
+                    " btn-rounded waves-effect"
+                  }
                   onClick = {()=> onChange (ele.name)}>{ele.name}</button>
                   </div>
                 );
@@ -44,8 +57,4 @@ const ListGroup = props => {
 }
 export default ListGroup;
 
-// function CheckClass(genre, active) {
-//   const classButtons = "list-group-item list-item";
-//   return genre === active ? classButtons + ' list-item-active' :  classButtons;
-// }
  

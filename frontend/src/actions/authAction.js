@@ -11,7 +11,11 @@ import {
     PROFILE_UPDATE_SUCCESS,
     PROFILE_UPDATE_ERROR,
     UPLOAD_USER_IMAGE_SUCCESS,
-    UPLOAD_USER_IMAGE_ERROR
+    UPLOAD_USER_IMAGE_ERROR,
+    FORGOT_VERIFY_SUCCESS,
+    FORGOT_VERIFY_ERROR,
+    FORGOT_UPDATE_SUCCESS,
+    FORGOT_UPDATE_ERROR,
   } from "./actionTypes";
   import Axios from "axios";
   
@@ -21,7 +25,7 @@ import {
       try {
         // console.log(credentials);
         const result = await Axios.post("/api/users/login", credentials);
-        console.log(result.data);
+        // console.log(result.data);
         dispatch({ type: LOGIN_SUCCESS, payload: result.data});
       } catch (error) {
         dispatch({ type: LOGIN_ERROR, error });
@@ -35,8 +39,8 @@ import {
         // console.log("credentials");
         // console.log(credentials); 
         const result = await Axios.post("/api/users/signupandverify", credentials);
-        console.log("helle");
-        console.log(result);
+        // console.log("helle");
+        // console.log(result);
         dispatch({ type: SIGNUP_SUCCESS, payload: result.data});
       } catch (error) {
         dispatch({ type: SIGNUP_ERROR, error });
@@ -86,8 +90,8 @@ export const userDetail = ()=>{
     try{
       // console.log("heyhey");
       const result = await Axios.get("/api/users/userdetail/" + localStorage.getItem("name"));
-      // console.log("getawait userdetail");
-      // console.log("hello",result.data); 
+      console.log("getawait userdetail");
+      console.log("hello",result); 
       dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: result.data });
     }
     catch(error){
@@ -116,11 +120,41 @@ export const addUserImage = (image) => {
         formData,
         contentType
       );
-      console.log("come");
-      console.log(result.data);
+      // console.log("come");
+      // console.log(result.data);
       dispatch({ type: UPLOAD_USER_IMAGE_SUCCESS, payload: result.data});
     } catch (error) {
       dispatch({ type: UPLOAD_USER_IMAGE_ERROR, error });
+    }
+  };
+};
+
+
+export const forgotandverify = (email) => {
+  return async (dispatch) => {
+    try {
+      const result = await Axios.post("/api/users/forgotandverify", {"email" : email,});
+      // console.log("helle");
+      // console.log(result);
+      dispatch({ type: FORGOT_VERIFY_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: FORGOT_VERIFY_ERROR, error });
+    }
+  };
+};
+
+export const forgotandupdate = (credentials) => {
+  return async (dispatch) => {
+    try {
+      // console.log("credentials");
+      // console.log(credentials);
+      credentials.user_id = localStorage.getItem("name");
+      const result = await Axios.put("/api/users/forgotandupdate", credentials);
+      // console.log("helle");
+      // console.log(result);
+      dispatch({ type: FORGOT_UPDATE_SUCCESS, payload: result.data});
+    } catch (error) {
+      dispatch({ type: FORGOT_UPDATE_ERROR, error });
     }
   };
 };

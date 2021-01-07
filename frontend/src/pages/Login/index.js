@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
 // import Button from "../../components/common/Button";
 import "./style.css";
-import {Helmet} from 'react-helmet';
+// import {Helmet} from 'react-helmet';
 
 class Login extends React.Component {
   state = {
@@ -97,7 +97,6 @@ class Login extends React.Component {
                         <input
                         type="email"
                         name="email"
-                        error={errors["email"]}
                         id="orangeForm-email" 
                         className="form-control"
                         onChange={this.handleChange}
@@ -113,7 +112,6 @@ class Login extends React.Component {
                         <input
                         name="password"
                         type="password"
-                        error={errors["password"]}
                         onChange={this.handleChange}
                         value={password}
                         id="orangeForm-pass" 
@@ -131,38 +129,32 @@ class Login extends React.Component {
                         ) : (
                         <> </>
                       )}
-
-
-
-                    <div className="text-center">
+                    <div className="text-center" >
                         <button className="btn purple-gradient btn-lg"
                         onClick={this.handleSubmit}>Login</button>
                         <div className="inline-ul text-center d-flex justify-content-center">
-
-
+                        <div>
+                          <a href="http://localhost:3000/forgotpassword" style={{
+                          color:"blue"}}>Forgot Password</a>
+                          <div style = {{backgroundColor: "blue",
+                                width: "120px",
+                                height: "1px"}}/>
+                        </div>
                         <div className="d-flex flex-row mt-5">
                        <span className=" text-right  mt-2  text-info">No Account?</span>
                                <a href="http://localhost:3000/register" 
                                 > <button type="button" className="btn btn-info btn-rounded btn-sm"> Register </button></a>
                           </div>
-
-
-                    </div>
+                        </div>  
                     </div>
                   </form>
                     </div>
                 </div>
-
                 </div>
             </div>
             </div>
-
         </div>
-
         </div>
-
-
-
     );
   }
 }

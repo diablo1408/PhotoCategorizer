@@ -25,6 +25,7 @@ class MainPage extends React.Component {
     userInput: "",
     isGenreDisplay: false,
     toggleName: "All",
+    enableName : '',
   };
 
   componentDidMount() {
@@ -48,13 +49,15 @@ class MainPage extends React.Component {
   onOpenGenre = (e) => {
     // console.log(e.target.id);
     this.setState({ userInput: e.target.id });
-    this.setState({ isGenreDisplay: true });
     this.setState({toggleName:e.target.id});
+    this.setState({ enableName: e.target.id });
+    this.setState({ isGenreDisplay: true,showOptions : false });
     this.props.getImages(e.target.id);
 
   };
 
-  showSearchList() {
+  showSearchList(){
+    // e.preventDefault();
     const showOptions = this.state.showOptions;
     const userInput = this.state.userInput;
     const filteredGenres = this.state.filteredGenres;
@@ -90,6 +93,7 @@ class MainPage extends React.Component {
 
   changeSearchList = (e) => {
     // console.log(e.target.value);
+    // e.preventDefault();
     if (e.target.value === "") {
       this.setState({ currentGenre: "All", currentPage: 1 });
       this.props.getImages("All");
@@ -112,12 +116,19 @@ class MainPage extends React.Component {
         optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
     // console.log(filteredGenres);
-
-    this.setState({
-      filteredGenres,
-      showOptions: true,
-      userInput,
-    });
+    if(filteredGenres.length === 0){
+      this.setState({
+          filteredGenres : [],
+          showOptions : false,
+        });
+  }
+  else{
+  this.setState({
+    filteredGenres,
+    showOptions: true,
+    userInput
+  });
+}
   };
   handleDownload = (e) => {
     e.preventDefault();
@@ -132,7 +143,7 @@ class MainPage extends React.Component {
   };
 
   render() {
-    const { currentPage, pageSize } = this.state;
+    const { currentPage, pageSize ,currentGenre} = this.state;
     const { images, genres, loggedIn } = this.props;
     if (!loggedIn) this.props.history.push("/login");
     let filteredImages = [];
@@ -209,6 +220,8 @@ class MainPage extends React.Component {
                 </div>
               </div>
             </div>
+
+
             <div className=" text-center  m-2">
               <button class="btn btn-primary btn-large " type="button">
                 <span
@@ -243,13 +256,6 @@ class MainPage extends React.Component {
                 </div>
               </div>
             ) : (
-              // <div className="card">
-              //   <ListGroup
-
-              //     onChange={(val,e) => this.handleChange("currentGenre", val,e)}
-              //     options={genres}
-              //   />
-              // </div>
 
               <div className="list-group ">
                 {genres != undefined ? (
@@ -360,46 +366,41 @@ class MainPage extends React.Component {
                 ) : (
                   <></>
                 )}
-                {/* {
-                    genres && genres.map((genres[0])=>{
-                      // console.log("genres[0]",genres[0].name);
-                      if(genres[0].name !== "All"){
-                      return(
-                        
-                        <div key = {genres[0]._id} className="p-2 bd-highlight "><button type="button" className={"btn btn-outline-info btn-rounded  waves-effect"}
-                        onClick = {()=> this.handleChange("currentGenre", genres[0].name)}>{genres[0].name}</button>
-                        </div>
-                      );
-                      }
-                    })
-      
-                  } */}
               </div>
             )}
+
             <p className="text-left text-muted mt-3 font-weight-bold text-primary">
               {!!filteredImages.length ? `${filteredImages.length} ` : "0 "}
               Images found.
             </p>
             <hr></hr>
-
-            {!!filteredImages ? (
-              <ImageTable
+           
+                                
+                  {!!filteredImages ? (
+                    <ImageTable
+                      pageSize={pageSize}
+                      currentPage={currentPage}
+                      images={filteredImages}
+                      // genre = {currentGenre}
+                    />
+                  )
+                  
+                  
+                  : (
+                    <h1 className="text-white">No Images</h1>
+                  )}
+                  
+                
+              <br />
+              <Pagination
+                itemsCount={filteredImages.length}
                 pageSize={pageSize}
                 currentPage={currentPage}
+                onPageChange={this.onPageChange}
                 images={filteredImages}
                 // genre = {currentGenre}
               />
-            ) : (
-              <h1 className="text-white">No Images</h1>
-            )}
-
-            <br />
-            <Pagination
-              itemsCount={filteredImages.length}
-              pageSize={pageSize}
-              onPageChange={this.onPageChange}
-              currentPage={currentPage}
-            />
+            
           </div>
         </main>
         <Footer />

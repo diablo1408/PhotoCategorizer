@@ -1,24 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addImage } from "../../actions/imageAction";
-
 import { getImages } from "../../actions/imageAction";
 
 class FileUpload extends React.Component{
 
-    state = {
-      // refresh : false,
-    };
-    componentDidMount(){
-      
-    }
-    componentDidUpdate(){
-      // this.props.getImages("All");
-    }
 
     handleUpload = (e) => {
         e.preventDefault();
-        // console.log(e.target.files)
 
         //for multiple files
         this.props.addImage(e.target.files);
@@ -30,9 +19,6 @@ class FileUpload extends React.Component{
       };
 
     render(){
-      // if(this.state.refresh){
-      //   this.setState({refresh : false});
-      // }
         return (
           <div>
             

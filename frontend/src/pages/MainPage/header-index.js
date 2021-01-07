@@ -28,16 +28,17 @@ class Header extends React.Component {
     const { authMessage, userData } = this.props;
 
     let coverImage = img;
-
-    if (userData.user_image !== undefined) {
+    // if(userData.user_image !== undefined){
+    //   coverImage = "/uploads/" + userData.user_image;
+    // }
+    if(this.state.userData !== undefined){
       const encodedImage = new Buffer(userData.user_image, "binary").toString(
         "base64"
       );
       coverImage = "data:image/jpeg;base64," + encodedImage;
     }
-    if (coverImage === "data:image/jpeg;base64,") {
-      coverImage = img;
-    }
+
+    // console.log(userData.user_image);
 
     if (!this.state.logout_status) {
       return <Redirect to="/login" />;

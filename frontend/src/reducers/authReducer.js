@@ -11,14 +11,19 @@ import {
   PROFILE_UPDATE_SUCCESS,
   PROFILE_UPDATE_ERROR,
   UPLOAD_USER_IMAGE_SUCCESS,
-  UPLOAD_USER_IMAGE_ERROR
+  UPLOAD_USER_IMAGE_ERROR,
+  FORGOT_UPDATE_SUCCESS,
+  FORGOT_UPDATE_ERROR,
+  FORGOT_VERIFY_SUCCESS,
+  FORGOT_VERIFY_ERROR,
 } from "../actions/actionTypes";
 
 const initState = {
   loggedIn: (localStorage.getItem('loggedIn')==='true') || false,
   userData: {},
   authMessage: null,
-  status : false
+  status : false,
+  isVerify : false
 };
 
 export default function (state = initState, action) {
@@ -103,6 +108,33 @@ export default function (state = initState, action) {
         authMessage: action.error,
       };
 
+      case FORGOT_VERIFY_SUCCESS:
+        return {
+          ...state,
+          status : action.payload.status,
+          authMessage: action.payload.msg,
+        };
+  
+      case FORGOT_VERIFY_ERROR:
+        return {
+          ...state,
+          authMessage: action.error.response.data.error,
+        };
+
+        case FORGOT_UPDATE_SUCCESS:
+        return {
+          ...state,
+          isVerify : action.payload.verified,
+          status : action.payload.code === "1" ? false : true,
+          authMessage: action.payload.msg,
+        };
+  
+      case FORGOT_UPDATE_ERROR:
+        return {
+          ...state,
+          authMessage: action.error.response.data.error,
+        };
+      
     default:
       return state;
   }
