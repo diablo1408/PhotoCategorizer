@@ -13,6 +13,6 @@ const userSchema = mongoose.Schema({
       match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
     },
     password: { type: String, required: true },
-    user_image : { type : Buffer }
+    user_image : { type : String}
 });
 module.exports = mongoose.model("User", userSchema, "users");

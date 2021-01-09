@@ -90,8 +90,8 @@ export const userDetail = ()=>{
     try{
       // console.log("heyhey");
       const result = await Axios.get("/api/users/userdetail/" + localStorage.getItem("name"));
-      console.log("getawait userdetail");
-      console.log("hello",result); 
+      // console.log("getawait userdetail");
+      // console.log("hello",result); 
       dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: result.data });
     }
     catch(error){

@@ -11,7 +11,7 @@ class LogIn{
         // console.log(email + password);
         User.find({ email: email }, (err, user) => {
             if (err || user.length === 0)
-                return res.status(200).json({msg : 'Invalid Email',status : false});
+                return res.status(200).json({msg : "Incorrect Username or Password!",status : false});
             else if (user.length > 0) {
             //Comparing password
             bcrypt.compare(password, user[0].password, (_err, result) => {
@@ -30,7 +30,7 @@ class LogIn{
                         });
                     
                 } else
-                    return res.status(200).json({msg : 'Incorrect Password!',status : false});
+                    return res.status(200).json({msg : 'Incorrect Username or Password!',status : false});
             });
             }
         }).catch((error) => {return res.status(500).json({msg : error})});

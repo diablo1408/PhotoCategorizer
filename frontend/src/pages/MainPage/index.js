@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import Header from "./header-index";
 import Footer from "./footer-index";
-
+import _ from "lodash";
 import { ImageTable, Pagination } from "../../components";
-import { ListGroup } from "../../components/common";
+// import { ListGroup } from "../../components/common";
 
 import { getImages } from "../../actions/imageAction";
 import {
@@ -143,12 +143,28 @@ class MainPage extends React.Component {
   };
 
   render() {
-    const { currentPage, pageSize ,currentGenre} = this.state;
-    const { images, genres, loggedIn } = this.props;
+    const { currentPage, pageSize} = this.state;
+    const { images, genres, loggedIn,loading,loadingPage} = this.props;
     if (!loggedIn) this.props.history.push("/login");
     let filteredImages = [];
     filteredImages = images;
-    // console.log("imagesgenres");
+    // console.log("images",images);
+
+    if (loadingPage) {
+      return (
+        <div className=" text-center  m-5">
+        <button className="btn btn-primary btn-large " type="button">
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="false"
+          ></span>
+          Loading...
+        </button>
+      </div>
+      );
+    }
+
 
     let div0 = ["btn", "btn-outline-info", "btn-rounded", " waves-effect"];
     let div1 = ["btn", "btn-outline-info", "btn-rounded", " waves-effect"];
@@ -160,36 +176,38 @@ class MainPage extends React.Component {
     if (this.state.toggleName === Object(genres[0]).name) {
       div0.push("btn-info");
       div0 = div0.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     } else if (this.state.toggleName === Object(genres[1]).name) {
       div1.push("btn-info");
       div1 = div1.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     } else if (this.state.toggleName === Object(genres[2]).name) {
       div2.push("btn-info");
       div2 = div2.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     } else if (this.state.toggleName === Object(genres[3]).name) {
       div3.push("btn-info");
       div3 = div3.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     } else if (this.state.toggleName === Object(genres[4]).name) {
       div4.push("btn-info");
       div4 = div4.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     } else if (this.state.toggleName === Object(genres[5]).name) {
       div5.push("btn-info");
       div5 = div5.filter((ele) => {
-        return ele != "btn-outline-info";
+        return ele !== "btn-outline-info";
       });
     }
 
-    console.log(div3);
+    // console.log(div3);
+
+
 
     return (
       <div>
@@ -221,18 +239,22 @@ class MainPage extends React.Component {
               </div>
             </div>
 
-
+          {
+            loading
+            ?
             <div className=" text-center  m-2">
-              <button class="btn btn-primary btn-large " type="button">
+              <button className="btn btn-primary btn-large " type="button">
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="false"
                 ></span>
                 Loading...
               </button>
             </div>
-
+            :
+            <></>
+        }
             {this.state.isGenreDisplay ? (
               <div className="card">
                 <div className="list-group">
@@ -246,10 +268,10 @@ class MainPage extends React.Component {
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary btn-floating"
+                        className="btn btn-primary btn-floating"
                         onClick = {this.handleDownload}
                       >
-                        <i class="fas fa-download"></i>
+                        <i className="fas fa-download"></i>
                       </button>
                     </div>
                   </div>
@@ -258,7 +280,7 @@ class MainPage extends React.Component {
             ) : (
 
               <div className="list-group ">
-                {genres != undefined ? (
+                {images.length !== 0 ? (
                   <div className="d-flex p-2 bd-highlight mx-md-auto">
                     <div
                       key={Object(genres[0])._id}
@@ -421,6 +443,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     images: state.image.images,
+    loading: state.image.loading,
+    loadingPage: state.image.loadingPage,
     genres: state.image.genres,
     genreList: state.image.genreList,
     loggedIn: state.auth.loggedIn,

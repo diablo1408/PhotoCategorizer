@@ -118,17 +118,18 @@ class Profile extends React.Component {
   }
 
   let coverImage = "https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg";
-  // console.log("hishfsdjfi",userData);
-  // if(userData.user_image !== undefined){
-  //   coverImage = "/images/" + userData.user_image;
-    // console.log(userData);
-    console.log(this.state.userData);
-  if(this.state.userData !== undefined){
-    const encodedImage = new Buffer(userData.user_image, "binary").toString(
-      "base64"
-    );
-    coverImage = "data:image/jpeg;base64," + encodedImage;
+  console.log("hishfsdjfi",userData);
+  if(userData.user_image !== ""){
+    coverImage = userData.user_image;
   }
+    // console.log(userData);
+  //   console.log(this.state.userData);
+  // if(this.state.userData !== undefined){
+  //   const encodedImage = new Buffer(userData.user_image, "binary").toString(
+  //     "base64"
+  //   );
+  //   coverImage = "data:image/jpeg;base64," + encodedImage;
+  // }
 
   
   return (

@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addImage } from "../../actions/imageAction";
-import { getImages } from "../../actions/imageAction";
-
+import { addImage,getImages,showLoader,hideLoader } from "../../actions/imageAction";
 class FileUpload extends React.Component{
 
 

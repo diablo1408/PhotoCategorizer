@@ -26,7 +26,7 @@ class UpdateDetail{
                     // console.log(user[0].password);
                     // console.log(res !== user[0].password);
                     if(result == false){
-                        return res.status(200).json({"msg" : "Incorrect current password"}); 
+                        return res.status(200).json({"msg" : "Incorrect Username or Password!"}); 
                     }
                     else{
                         //hash New password

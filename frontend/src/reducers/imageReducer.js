@@ -2,14 +2,18 @@ import { GET_IMAGES_SUCCESS, GET_IMAGES_ERROR,
   UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_ERROR,
   GET_GENRES_SUCCESS, GET_GENRES_ERROR ,
   GET_ALL_GENRES_SUCCESS, GET_ALL_GENRES_ERROR ,
-  DOWNLOAD_GENRES_SUCCESS,DOWNLOAD_GENRES_ERROR
+  DOWNLOAD_GENRES_SUCCESS,DOWNLOAD_GENRES_ERROR, 
+  SHOW_LOADER, HIDE_LOADER,
+  SHOW_PAGE_LOADER, HIDE_PAGE_LOADER
 } from "../actions/actionTypes";
 
 const initialState = {
   genres: [],
   images : [],
   error : null,
-  genreList : []
+  genreList : [],
+  loading : false,
+  loadingPage : false
 };
 
 export default function (state = initialState, action) {
@@ -71,6 +75,29 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: action.error,
+      };
+
+      case SHOW_LOADER:
+      return {
+        ...state,
+        loading : true,
+      };
+      case HIDE_LOADER:
+      return {
+        ...state,
+        loading : false,
+      };
+
+      case SHOW_PAGE_LOADER:
+      return {
+        ...state,
+        loadingPage : true,
+      };
+      
+      case HIDE_PAGE_LOADER:
+      return {
+        ...state,
+        loadingPage : false,
       };
 
     default:

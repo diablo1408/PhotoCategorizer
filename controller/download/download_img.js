@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path'); 
 const Vision = require("../../models/vision");
 const util = require("util");
+const download = require('image-downloader')
 
 
 class DownLoad {
@@ -10,7 +11,7 @@ class DownLoad {
             //mke folder of given genre
             let FS_MKDIR = util.promisify(fs.mkdir);
             try{
-                await FS_MKDIR(path.join("C:/Users/shubham/Desktop/", genre))
+                await FS_MKDIR(path.join("/home/utsav/Desktop", genre))
                 .then((user) => {
                     console.log('Directory created successfully!')
                 }) 
@@ -26,27 +27,29 @@ class DownLoad {
             
             for(let i = 0;i<allimagesData.length;i++){
                 let img_name = allimagesData[i]["img_name"].substr(allimagesData[0]["img_name"].indexOf("-")+1);
-                let img_buffer = allimagesData[i]["img_buffer"];
+                // let img_buffer = allimagesData[i]["img_buffer"];
 
+                const options = {
+                url: img_name,
+                dest: "/home/utsav/Desktop/" + genre                // will be saved to /path/to/dest/image.jpg
+                }
 
-                let FS_WRITEFILE = util.promisify(fs.writeFile);
                 try{
-                    await FS_WRITEFILE(path.join("C:/Users/shubham/Desktop/"+genre,img_name), img_buffer,"base64")
-                    .then(() => {
-                        // console.log('file saved to ', img_name)
-                    })
+                   const filename =  download.image(options);
+                //    console.log(filename);
                 }
                 catch(err){
                     console.log(err);
+                    console.log("err while downloading");
                 }
             }
     }
 
   handleRequest(req, res) {
-       console.log(req)
+    //    console.log(req)
     const user_id = req.params.user_id;
     const genreList = req.params.genres.split(',');
-    console.log(user_id,genreList);
+    // console.log(user_id,genreList);
     try{
             Vision.find({user_id : user_id})
             .then(async (user)=>{

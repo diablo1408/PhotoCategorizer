@@ -11,7 +11,7 @@ class GetAllImage{
         let label_mapping = user[0].image_labels;
         let found = label_mapping.find((ele)=>{return (ele.name === req.params.label)});
         // console.log(found.label);
-        if(found === undefined){return res.status(404).send("Label is not found");}
+        if(found === undefined){return res.status(200).json({"image" : []});}
         let found_label = found.label;
         // return res.status(200).send(found_label);
         return res.status(200).json({"image":found_label})

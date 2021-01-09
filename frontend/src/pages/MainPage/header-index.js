@@ -3,15 +3,12 @@ import img from "../assets/img/avatar-icon-images-4.jpg";
 import FileUpload from "./file_upload";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-// import {Helmet} from 'react-helmet';
 import { userDetail, signOut } from "../../actions/authAction";
-// import {appendScript} from "../appendScript";
 import MultiDropDown from "./MultiDropDown";
-// import "../assets/js/mdb.js";
 
 class Header extends React.Component {
   state = {
-    logout_status: localStorage.getItem("loggedIn"),
+    logout_status: localStorage.getItem("loggedIn")
   };
 
   componentDidMount() {
@@ -28,15 +25,15 @@ class Header extends React.Component {
     const { authMessage, userData } = this.props;
 
     let coverImage = img;
-    // if(userData.user_image !== undefined){
-    //   coverImage = "/uploads/" + userData.user_image;
-    // }
-    if(this.state.userData !== undefined){
-      const encodedImage = new Buffer(userData.user_image, "binary").toString(
-        "base64"
-      );
-      coverImage = "data:image/jpeg;base64," + encodedImage;
+    if(userData.user_image !== ""){
+      coverImage = userData.user_image;
     }
+    // if(this.state.userData !== undefined){
+    //   const encodedImage = new Buffer(userData.user_image, "binary").toString(
+    //     "base64"
+    //   );
+    //   coverImage = "data:image/jpeg;base64," + encodedImage;
+    // }
 
     // console.log(userData.user_image);
 
@@ -47,6 +44,7 @@ class Header extends React.Component {
     return (
       <header>
         <nav className="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+          
           <div className="container-fluid">
             <button
               className="navbar-toggler"
@@ -132,6 +130,7 @@ const mapStateToProps = (state) => {
   return {
     authMessage: state.auth.authMessage,
     userData: state.auth.userData,
+    // images: state.image.images,
   };
 };
 const mapDispatchToProps = (dispatch) => {

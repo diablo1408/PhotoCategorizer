@@ -1,6 +1,8 @@
 const cors = require("cors");
 const express = require("express");
 // const Redis = require("ioredis");
+require('dotenv').config();
+var cloudinary = require('cloudinary').v2;
 
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -10,6 +12,15 @@ const downloadRoute = require("./routes/download");
 
 const app = express();
 const port = process.env.PORT || 8000;
+
+//cloudinary 
+// set your env variable CLOUDINARY_URL or set the following configuration
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret
+});
+
 
 app.use(cors());
 app.use(express.json());

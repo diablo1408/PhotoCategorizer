@@ -24,7 +24,7 @@ const visionSchema = mongoose.Schema({
       ref: 'User'
     },
     image:[{img_name : String,img_label : []}],
-    image_labels:[{name : String,label : [{img_name : String,img_buffer : Buffer}]}] 
+    image_labels:[{name : String,label : [{img_name : String}]}] 
     
 });
 const Vision = mongoose.model("Vision", visionSchema, "visions");

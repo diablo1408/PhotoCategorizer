@@ -19,7 +19,7 @@ async function get_features(file){
         concepts.forEach(function (item) {
           resp.push({name:item.name,value: item.value}); 
       });
-      
+      // console.log(resp);
       return resp; 
       },
       function(err) {
@@ -28,5 +28,7 @@ async function get_features(file){
       }
     );
 }
+
+// get_features("moun.jpg");
 
 module.exports = {get_features:get_features};
