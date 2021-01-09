@@ -4,9 +4,6 @@ import Joi from "@hapi/joi";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
-// import Button from "../../components/common/Button";
-import "./style.css";
-// import {Helmet} from 'react-helmet';
 
 class Login extends React.Component {
   state = {
@@ -60,101 +57,130 @@ class Login extends React.Component {
     if (_.isEmpty(errors)) this.props.signIn(this.state.data);
   };
 
-  saveUserDetais(user,loggedIn){
+  saveUserDetais(user, loggedIn) {
     // console.log(user);
     // loggedIn = true;
-    if(loggedIn){
-      localStorage.setItem('loggedIn', true);
+    if (loggedIn) {
+      localStorage.setItem("loggedIn", true);
     }
-  } 
-
+  }
 
   render() {
     const { data, errors } = this.state;
     const { email, password } = data;
-    const { authMessage, loggedIn,userData} = this.props;
+    const { authMessage, loggedIn, userData } = this.props;
     if (loggedIn) this.props.history.push("/dashboard");
-    console.log("logged",loggedIn);
+    console.log("logged", loggedIn);
     return (
-
-             <div className="bg-image-login ">
-            <div className=" d-flex h-100 justify-content-center align-items-center">
-            <div className="container">
+      <div className="bg-image-login ">
+        <div className=" d-flex h-100 justify-content-center align-items-center">
+          <div className="container">
             <div className="row">
-                <div className="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
-
+              <div className="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
                 <div className="card wow fadeIn" data-wow-delay="0.3s">
-                    <div className="card-body">
-
+                  <div className="card-body">
                     <div className="form-header purple-gradient">
-                        <h3 className="font-weight-500 my-2 py-1"><i className="fas fa-user"></i> Log in</h3>
+                      <h3 className="font-weight-500 my-2 py-1">
+                        <i className="fas fa-user"></i> Log in
+                      </h3>
                     </div>
 
-
-              <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn)}>
-                    <div className="md-form">
-                        <i className="fas fa-envelope prefix " ></i>
+                    <form
+                      onSubmit={this.handleSubmit}
+                      onClick={this.saveUserDetais(userData, loggedIn)}
+                    >
+                      <div className="md-form">
+                        <i className="fas fa-envelope prefix "></i>
                         <input
-                        type="email"
-                        name="email"
-                        id="orangeForm-email" 
-                        className="form-control"
-                        onChange={this.handleChange}
-                        value={email}
-                        autoFocus
+                          type="email"
+                          name="email"
+                          id="orangeForm-email"
+                          className="form-control"
+                          onChange={this.handleChange}
+                          value={email}
+                          autoFocus
                         />
                         <label htmlFor="orangeForm-email">Your email</label>
-                        { errors["email"] && <div className="alert alert-danger"> {errors["email"]} </div> }
-                    </div>
+                        {errors["email"] && (
+                          <div className="alert alert-danger">
+                            {" "}
+                            {errors["email"]}{" "}
+                          </div>
+                        )}
+                      </div>
 
-                    <div className="md-form">
+                      <div className="md-form">
                         <i className="fas fa-lock prefix "></i>
                         <input
-                        name="password"
-                        type="password"
-                        onChange={this.handleChange}
-                        value={password}
-                        id="orangeForm-pass" 
-                        className="form-control"
+                          name="password"
+                          type="password"
+                          onChange={this.handleChange}
+                          value={password}
+                          id="orangeForm-pass"
+                          className="form-control"
                         />
                         <label htmlFor="orangeForm-pass">Your password</label>
-                        { errors["password"] && <div className="alert alert-danger"> {errors["password"]} </div> }
-                    </div>
+                        {errors["password"] && (
+                          <div className="alert alert-danger">
+                            {" "}
+                            {errors["password"]}{" "}
+                          </div>
+                        )}
+                      </div>
 
-                    {authMessage ? (
-                        <p className="bg-info text-white">
-                        {" "}
-                        {authMessage}
-                        </p>
-                        ) : (
+                      {authMessage ? (
+                        <p className="bg-info text-white"> {authMessage}</p>
+                      ) : (
                         <> </>
                       )}
-                    <div className="text-center" >
-                        <button className="btn purple-gradient btn-lg"
-                        onClick={this.handleSubmit}>Login</button>
-                        <div className="inline-ul text-center d-flex justify-content-center">
-                        <div>
-                          <a href="http://localhost:3000/forgotpassword" style={{
-                          color:"blue"}}>Forgot Password</a>
-                          <div style = {{backgroundColor: "blue",
+                      <div className="text-center">
+                        <button
+                          className="btn purple-gradient btn-lg"
+                          onClick={this.handleSubmit}
+                        >
+                          Login
+                        </button>
+                        <div className=" justify-content-center ">
+                          <div className=" text-info text-center mt-3 ">
+                            <a
+                              href="http://localhost:3000/forgotpassword"
+                             
+                            >
+                              <u><strong>Forgot your Password?</strong>  </u>
+                            </a>
+                            {/* <div
+                              style={{
+                                backgroundColor: "blue",
                                 width: "120px",
-                                height: "1px"}}/>
-                        </div>
-                        <div className="d-flex flex-row mt-5">
-                       <span className=" text-right  mt-2  text-info">No Account?</span>
-                               <a href="http://localhost:3000/register" 
-                                > <button type="button" className="btn btn-info btn-rounded btn-sm"> Register </button></a>
+                                height: "1px",
+                              }}
+                            /> */}
                           </div>
-                        </div>  
-                    </div>
-                  </form>
-                    </div>
+                          <div className="d-flex flex-row justify-content-center mt-3">
+                            <span className="   mt-2  text-info">
+                              No Account?
+                            </span>
+                            <a href="http://localhost:3000/register">
+                              {" "}
+                              <button
+                                type="button"
+                                className="btn btn-info btn-rounded btn-sm"
+                              >
+                                {" "}
+                                Register{" "}
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     );
   }
 }

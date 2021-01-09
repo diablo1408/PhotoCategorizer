@@ -150,20 +150,20 @@ class MainPage extends React.Component {
     filteredImages = images;
     // console.log("images",images);
 
-    if (loadingPage) {
-      return (
-        <div className=" text-center  m-5">
-        <button className="btn btn-primary btn-large " type="button">
-          <span
-            className="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="false"
-          ></span>
-          Loading...
-        </button>
-      </div>
-      );
-    }
+    // if (loadingPage) {
+    //   return (
+    //     <div className=" text-center  m-5">
+    //     <button className="btn btn-primary btn-large " type="button">
+    //       <span
+    //         className="spinner-border spinner-border-sm"
+    //         role="status"
+    //         aria-hidden="false"
+    //       ></span>
+    //       Loading...
+    //     </button>
+    //   </div>
+    //   );
+    // }
 
 
     let div0 = ["btn", "btn-outline-info", "btn-rounded", " waves-effect"];
@@ -396,7 +396,7 @@ class MainPage extends React.Component {
               Images found.
             </p>
             <hr></hr>
-           
+                   <div className="row">
                                 
                   {!!filteredImages ? (
                     <ImageTable
@@ -406,11 +406,13 @@ class MainPage extends React.Component {
                       // genre = {currentGenre}
                     />
                   )
+                 
                   
                   
                   : (
                     <h1 className="text-white">No Images</h1>
                   )}
+                   </div>
                   
                 
               <br />

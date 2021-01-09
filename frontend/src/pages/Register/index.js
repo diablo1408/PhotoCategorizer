@@ -2,28 +2,16 @@ import React from "react";
 import Joi from "@hapi/joi";
 import { connect } from "react-redux";
 import { getOTP, signUpandVerify } from "../../actions/authAction";
-import "./style.css";
-import {Helmet} from "react-helmet";
-
-
-import "../assets/css/bootstrap.min.css";
-import "../assets/css/mdb.lite.min.css";
-import "../assets/css/mdb.min.css";
-import "../assets/css/style.min.css";
-import "../assets/css/custom.css";
-
-
-
 
 class RegisterForm extends React.Component {
   state = {
     data: {
-      username:"",
+      username: "",
       email: "",
       password: "",
-      otp : "",
+      otp: "",
     },
-    isVerify : false,
+    isVerify: false,
     errors: {},
     authError: "",
   };
@@ -61,224 +49,239 @@ class RegisterForm extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-     
-      this.props.getOTP(this.state.data.email);
-    };
 
-  handleVerify = (e) =>{
+    this.props.getOTP(this.state.data.email);
+  };
+
+  handleVerify = (e) => {
     e.preventDefault();
     // console.log(this.state.data,"verfiy");
 
-    if((this.state.data.username !== "") && 
-      (this.state.data.email !== "") && 
-      (this.state.data.username !== "") &&
-      (this.state.data.otp !== "")){
-        const {username, password, email ,otp} = this.state.data;
-        this.props.signUpandVerify({username, email, password ,otp});
-      }
-  }
+    if (
+      this.state.data.username !== "" &&
+      this.state.data.email !== "" &&
+      this.state.data.username !== "" &&
+      this.state.data.otp !== ""
+    ) {
+      const { username, password, email, otp } = this.state.data;
+      this.props.signUpandVerify({ username, email, password, otp });
+    }
+  };
 
   handleResend = (e) => {
     e.preventDefault();
     this.props.getOTP(this.state.data.email);
-  }
-
+  };
 
   schema = {
     username: Joi.string().alphanum().min(3).max(30),
     email: Joi.string().email().required().label("Email"),
     password: Joi.string().min(8).required().label("Password"),
-    otp: (this.state.isVerify === false) ? "" : Joi.string().min(6).max(6),
+    otp: this.state.isVerify === false ? "" : Joi.string().min(6).max(6),
   };
 
-
-  saveUserDetais(user,loggedIn,authMessage){
-    if(authMessage !== '' && authMessage !== undefined){return;}
-   // console.log("hiiii",user.userData);
-   // console.log(user);
-    if(user.userData === undefined){return;}
-    if(loggedIn){
-      localStorage.setItem('loggedIn', true);
-      if(localStorage.getItem('loggedIn')==='true'){  
-        localStorage.setItem('name',user.userData._id);
+  saveUserDetais(user, loggedIn, authMessage) {
+    if (authMessage !== "" && authMessage !== undefined) {
+      return;
+    }
+    // console.log("hiiii",user.userData);
+    // console.log(user);
+    if (user.userData === undefined) {
+      return;
+    }
+    if (loggedIn) {
+      localStorage.setItem("loggedIn", true);
+      if (localStorage.getItem("loggedIn") === "true") {
+        localStorage.setItem("name", user.userData._id);
       }
     }
   }
 
   render() {
-    if(this.props.status === true && this.state.isVerify === false){
-      this.setState({isVerify : true});
+    if (this.props.status === true && this.state.isVerify === false) {
+      this.setState({ isVerify: true });
     }
-    const { authMessage,userData ,loggedIn } = this.props;
+    const { authMessage, userData, loggedIn } = this.props;
     // console.log(loggedIn);
     const { errors, authError } = this.state;
-    const { username, email, password, otp} = this.state.data;
+    const { username, email, password, otp } = this.state.data;
     if (loggedIn) this.props.history.push("/dashboard");
 
     return (
-        <div >
-          <div className="bg-image-register ">
-            <div className="container h-100 d-flex justify-content-center align-items-center">
-
-              <div className="row pt-5">
-
-                <div className="col-md-12">
-
-                  <div className="card">
-                    <div className="card-body">
+      <div>
+        <div className="bg-image-register ">
+          <div className="container h-100 d-flex justify-content-center align-items-center">
+            <div className="row pt-5">
+              <div className="col-md-12">
+                <div className="card">
+                  <div className="card-body">
                     <div className="form-header purple-gradient">
-                        <h3 className="font-weight-500 my-2 py-1"><i className="fas fa-user"></i> Register</h3>
+                      <h3 className="font-weight-500 my-2 py-1">
+                        <i className="fas fa-user"></i> Register
+                      </h3>
                     </div>
-                      {/* <h2 className="font-weight-bold my-4 text-center mb-2 mt-2 font-weight-bold">
+                    {/* <h2 className="font-weight-bold my-4 text-center mb-2 mt-2 font-weight-bold">
                         <strong>Register</strong>
                       </h2> */}
 
-
+                    <div className="">
+                      <div className="d-flex flex-row-reverse">
+                        <a href="http://localhost:3000/login">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn btn-info btn-rounded btn-sm"
+                          >
+                            LogIn
+                          </button>
+                        </a>
+                        <span className=" text-right mt-2 text-info">
+                          Already member?
+                        </span>
+                      </div>
 
                       <div className="">
-                        <div className="d-flex flex-row-reverse">
-                        <a href="http://localhost:3000/login" 
-                            > <button type="button" className="btn btn-info btn-rounded btn-sm">SignIn</button></a>
-                          <span className=" text-right mt-2 text-info">Already member?</span>
-
-
-                        </div>
-
-
-
-                        <div className="">
-
-                          <form onSubmit={this.handleSubmit} onClick={this.saveUserDetais(userData,loggedIn,authMessage)}>
-
-
-                                <div className="md-form">
-                                    <i className="fas fa-user prefix"></i>
-                                    <input
-                                    type = "text"
-                                    name="username"
-                                     id="orangeForm-name" 
-                                    className="form-control"
-                                    error={errors["username"]}
-                                    onChange={this.handleChange}
-                                    value = {username}
-                                    />
-                                    <label for="orangeForm-name">Your name</label>
-                                    { errors["username"] && <div className="alert alert-danger"> {errors["username"]} </div> }
-                                </div>
-                                <div className="md-form">
-                                    <i className="fas fa-envelope prefix"></i>
-                                    <input
-                                    name="email"
-                                    id="orangeForm-email" 
-                                    className="form-control"
-                                    type="email"
-                                    error={errors["email"]}
-                                    onChange={this.handleChange}
-                                    value = {email}
-                                    />
-                                    <label for="orangeForm-email">Your email</label>
-                                    { errors["email"] && <div className="alert alert-danger"> {errors["email"]} </div> }
-                                </div>
-
-                                <div className="md-form">
-                                    <i className="fas fa-lock prefix"></i>
-                                    <input
-                                    name="password"
-                                    id="orangeForm-pass" 
-                                    className="form-control"
-                                    type="password"
-                                  
-                                    onChange={this.handleChange}
-                                    // label="password"
-                                    value = {password}
-                                    />
-                                    <label for="orangeForm-pass">Your password</label>
-                                    { errors["password"] && <div className="alert alert-danger"> {errors["password"]} </div> }
-                                </div>
-
-                                
-
-                                {
-                                  this.state.isVerify ?                       
-                                      <div className="md-form">
-                                        <i className="fas fa-key prefix"></i>
-                                        <input
-                                        type = "text"
-                                        name="otp"
-                                        id="orangeForm-otp" 
-                                        className="form-control"
-                                    
-                                        onChange={this.handleChange}
-                                        value = {otp}
-                                        />
-                                        <label for="orangeForm-otp">Enter OTP</label>
-                                    </div>
-                                  : 
-                                  ""
-                                }
-
-
-                                {authMessage ? (
-                                <p className="bg-info text-white">
+                        <form
+                          onSubmit={this.handleSubmit}
+                          onClick={this.saveUserDetais(
+                            userData,
+                            loggedIn,
+                            authMessage
+                          )}
+                        >
+                          <div className="md-form">
+                            <i className="fas fa-user prefix"></i>
+                            <input
+                              type="text"
+                              name="username"
+                              id="orangeForm-name"
+                              className="form-control"
+                              error={errors["username"]}
+                              onChange={this.handleChange}
+                              value={username}
+                            />
+                            <label for="orangeForm-name">Your name</label>
+                            {errors["username"] && (
+                              <div className="alert alert-danger">
                                 {" "}
-                                {authMessage}
-                                </p>
-                                ) : (
-                                <> </>
-                                )}
-                                {
-                                  this.state.isVerify
-                                ?
-                                <div style = {{display : "flex"}}>
-                                  <div className="text-center"> 
-                                  <button className="btn btn-indigo btn-rounded mt-5"                 
+                                {errors["username"]}{" "}
+                              </div>
+                            )}
+                          </div>
+                          <div className="md-form">
+                            <i className="fas fa-envelope prefix"></i>
+                            <input
+                              name="email"
+                              id="orangeForm-email"
+                              className="form-control"
+                              type="email"
+                              error={errors["email"]}
+                              onChange={this.handleChange}
+                              value={email}
+                            />
+                            <label for="orangeForm-email">Your email</label>
+                            {errors["email"] && (
+                              <div className="alert alert-danger">
+                                {" "}
+                                {errors["email"]}{" "}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="md-form">
+                            <i className="fas fa-lock prefix"></i>
+                            <input
+                              name="password"
+                              id="orangeForm-pass"
+                              className="form-control"
+                              type="password"
+                              onChange={this.handleChange}
+                              // label="password"
+                              value={password}
+                            />
+                            <label for="orangeForm-pass">Your password</label>
+                            {errors["password"] && (
+                              <div className="alert alert-danger">
+                                {" "}
+                                {errors["password"]}{" "}
+                              </div>
+                            )}
+                          </div>
+
+                          {this.state.isVerify ? (
+                            <div className="md-form">
+                              <i className="fas fa-key prefix"></i>
+                              <input
+                                type="text"
+                                name="otp"
+                                id="orangeForm-otp"
+                                className="form-control"
+                                onChange={this.handleChange}
+                                value={otp}
+                              />
+                              <label for="orangeForm-otp">Enter OTP</label>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+
+                          {authMessage ? (
+                            <p className="bg-info text-white"> {authMessage}</p>
+                          ) : (
+                            <> </>
+                          )}
+                          {this.state.isVerify ? (
+                            <div className="row" style={{ display: "flex" }}>
+                              <div className="text-center col-6">
+                                <button
+                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleVerify}
-                                  >Verify</button>
-                                  </div> 
+                                >
+                                  Verify
+                                </button>
+                              </div>
 
-                                  <div className="text-center"> 
-                                  <button className="btn btn-indigo btn-rounded mt-5"                 
+                              <div className="text-center col-6">
+                                <button
+                                  className="btn  purple-gradient btn-rounded mt-3 btn-lg"
                                   type="button"
                                   onClick={this.handleResend}
-                                  >Resend</button>
-                                  </div>  
-                                </div>
-                                :
-                                  <div className="text-center"> 
-                                  <button className="btn purple-gradient mt-3 btn-lg"                 
-                                  type="button"
-                                  disabled = {this.validate()}
-                                  onClick={this.handleSubmit}
-                                  >Sign up</button>
-                                  </div>
-
-                                }
-
-
-
+                                >
+                                  Resend
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="text-center">
+                              <button
+                                className="btn purple-gradient mt-3 btn-lg"
+                                type="button"
+                                disabled={this.validate()}
+                                onClick={this.handleSubmit}
+                              >
+                                Sign up
+                              </button>
+                            </div>
+                          )}
                         </form>
-                        </div>
-
-
-
-                          <div style = {{
-                                width: "154px",
-                                height: "1px",
-                                marginLeft : "256px"}}/>
-
-
                       </div>
+
+                      <div
+                        style={{
+                          width: "154px",
+                          height: "1px",
+                          marginLeft: "256px",
+                        }}
+                      />
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          </div>
-
-
+        </div>
       </div>
-
     );
   }
 }
@@ -287,7 +290,7 @@ const mapStateToProps = (state) => {
     userData: state.auth.userData,
     loggedIn: state.auth.loggedIn,
     authMessage: state.auth.authMessage,
-    status: state.auth.status
+    status: state.auth.status,
   };
 };
 const mapDispatchToProps = (dispatch) => {

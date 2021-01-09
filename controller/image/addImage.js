@@ -179,7 +179,7 @@ class AddImage {
                     $set: { 'image': image_mapping ,
                     'image_labels' : label_mapping
                   }}).then((user)=>{
-                    console.log(user)
+                   // console.log(user)
                   });
 
       }).catch((err)=>{
