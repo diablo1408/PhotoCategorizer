@@ -5,10 +5,12 @@ class FileUpload extends React.Component{
 
 
     handleUpload = (e) => {
-        e.preventDefault();
-
+      //  e.preventDefault();
+      
+       
         //for multiple files
         this.props.addImage(e.target.files);
+       
 
         //for one file
 

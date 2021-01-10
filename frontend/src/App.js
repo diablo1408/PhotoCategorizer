@@ -4,7 +4,6 @@ import {
   Switch,
   BrowserRouter as Router,
 } from "react-router-dom";
-import "./App.css";
 
 import { Provider } from "react-redux";
 import store from "./store";

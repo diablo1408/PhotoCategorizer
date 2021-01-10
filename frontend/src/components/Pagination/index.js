@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import "./style.css";
+
 
 export default function Pagination(props) {
   const { itemsCount, pageSize, onPageChange, currentPage } = props;

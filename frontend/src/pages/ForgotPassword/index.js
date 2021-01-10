@@ -72,7 +72,7 @@ class ForgotPassword extends React.Component {
     const { email, password, repassword, otp } = data;
     const { authMessage } = this.props;
     return (
-      <div className="bg-image-login ">
+      <div className="bg-image-forgorps ">
         <div className=" d-flex h-100 justify-content-center align-items-center">
           <div className="container">
             <div className="row">

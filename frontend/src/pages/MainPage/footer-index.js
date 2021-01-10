@@ -4,7 +4,7 @@ import React from "react";
 class Footer extends React.Component{
     render(){
         return(
-            <div>
+           
             <footer className="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
             <hr className="my-4"/>
             <div className="pb-4">
@@ -16,7 +16,7 @@ class Footer extends React.Component{
         </footer>
    
         
-      </div>
+     
         );
     }
 }

@@ -18,6 +18,7 @@ class LogIn{
                 if (_err) return res.status(400).json({msg : 'Authentication has failed!'});
                 else if (result) {
                     const userData = {
+                        id:user[0]._id,
                         username: user[0].username,
                         email: user[0].email,
                     };

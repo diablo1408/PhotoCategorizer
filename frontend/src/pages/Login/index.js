@@ -4,6 +4,7 @@ import Joi from "@hapi/joi";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { signIn } from "../../actions/authAction";
+import { Redirect }from "react-router-dom";
 
 class Login extends React.Component {
   state = {
@@ -58,9 +59,10 @@ class Login extends React.Component {
   };
 
   saveUserDetais(user, loggedIn) {
-    // console.log(user);
+     console.log(user);
     // loggedIn = true;
     if (loggedIn) {
+     localStorage.setItem("name",user.id)
       localStorage.setItem("loggedIn", true);
     }
   }
@@ -69,7 +71,12 @@ class Login extends React.Component {
     const { data, errors } = this.state;
     const { email, password } = data;
     const { authMessage, loggedIn, userData } = this.props;
-    if (loggedIn) this.props.history.push("/dashboard");
+    if (loggedIn) {
+     // console.logreturn <Redirect to="/dashboard" / >
+        this.props.history.push("/dashboard"); 
+       // return <a href="http://localhost:3000/dashboard"></a>
+    }
+  
     console.log("logged", loggedIn);
     return (
       <div className="bg-image-login ">

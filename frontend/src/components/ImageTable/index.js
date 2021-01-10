@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.css";
 
 export default function ImageTable({ images, currentPage, pageSize, genre }) {
   // console.log("genreimages");
@@ -13,31 +12,28 @@ export default function ImageTable({ images, currentPage, pageSize, genre }) {
   // console.log(currentImages);
   
   return (
-    <div className="col-md-12">
-      <div id="mdb-lightbox-ui"></div>
+   
+     
       <div class="mdb-lightbox ">
         {!!images &&
           currentImages.map((image) => {
             const coverImage = image.img_name;
-            // const coverImage = "/uploads/" + image.img_name;
+            console.log("upload_image",coverImage);
             return (
-              // <div className="col-4  " key={image._id}>
-              //   <img
-              //     src={coverImage}
-              //     className="gallery-img"
-              //     alt={"cover"}
-              //     key={image._id}
-              //   />
-              // </div>
-              <figure class="col-md-4">
+             
+              <figure className="container-img" >
               <a href={coverImage} data-size="1600x1067">
                 <img src={coverImage} class="img-fluid"/>
+                <div class="delete-icon"><i class="far fa-trash-alt fa-lg"/></div>
+                
               </a>
+             
+              
               </figure>
             );
           })}
       </div>
-      </div>
+     
        
    
   );

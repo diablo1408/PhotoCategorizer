@@ -26,6 +26,7 @@ class MainPage extends React.Component {
     isGenreDisplay: false,
     toggleName: "All",
     enableName : '',
+    
   };
 
   componentDidMount() {
@@ -93,7 +94,7 @@ class MainPage extends React.Component {
 
   changeSearchList = (e) => {
     // console.log(e.target.value);
-    // e.preventDefault();
+     e.preventDefault();
     if (e.target.value === "") {
       this.setState({ currentGenre: "All", currentPage: 1 });
       this.props.getImages("All");
@@ -131,7 +132,7 @@ class MainPage extends React.Component {
 }
   };
   handleDownload = (e) => {
-    e.preventDefault();
+   //e.preventDefault();
 
     let DownloadGenreList = [];
     DownloadGenreList.push(this.state.toggleName);
@@ -143,6 +144,7 @@ class MainPage extends React.Component {
   };
 
   render() {
+   
     const { currentPage, pageSize} = this.state;
     const { images, genres, loggedIn,loading,loadingPage} = this.props;
     if (!loggedIn) this.props.history.push("/login");
@@ -396,8 +398,8 @@ class MainPage extends React.Component {
               Images found.
             </p>
             <hr></hr>
-                   <div className="row">
-                                
+                   <div className="container-mason">
+                   <div id="mdb-lightbox-ui" ></div>            
                   {!!filteredImages ? (
                     <ImageTable
                       pageSize={pageSize}
