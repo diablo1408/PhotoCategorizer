@@ -30,6 +30,7 @@ function generateOTP(req,res,transporter){
     //  console.log(otp);
      // set otp in redis (with email as key) with expiration time(5 min)
      redis.set(email,otp,'PX',300000);
+     console.log("otp",otp)
 
     //Before sending a mail given link option will be TRUE 
     //of those gmail account by which you send a message

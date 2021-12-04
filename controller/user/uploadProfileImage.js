@@ -1,8 +1,8 @@
 const util = require('util');
 const fs = require("fs");
 const User = require("../../models/user");
-const {UploadImageByCloudinary} = require("../../cloudinaryUpload");
-const cloudinaryUpload = require('../../cloudinaryUpload');
+const {UploadImageByCloudinary} = require("../../utilities/cloudinaryUpload");
+const cloudinaryUpload = require('../../utilities/cloudinaryUpload');
 
 class UploadProfileImage {
   

@@ -110,9 +110,9 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const fs = require("fs");
 const Vision = require("../../models/vision");
-const {get_features} = require('../../predictGeneral');
+const {get_features} = require('../../utilities/predictGeneral');
 // const {get_nsfw_features} = require('../../predictNSFW');
-const {UploadImageByCloudinary} = require("../../cloudinaryUpload");
+const {UploadImageByCloudinary} = require("../../utilities/cloudinaryUpload");
 const util = require('util');
 
 //for multiple file

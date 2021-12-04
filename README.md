@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+ImageCat is a website for managing your Images, simplifying the task to sort through your Image Data.<br>
 
-In the project directory, you can run:
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **[Front Page](#front)**<br>
+2. **[Signup/Login](#signuplogin)**<br>
+3. **[Upload and Download Images](#uploaddownload)**<br>
+4. **[Search Images](#search)**<br>
+5. **[Profile Page](#profile)**<br>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<a name = "front"></a>
 
-### `npm test`
+1. ## Front Page of Website
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![landingpage](https://user-images.githubusercontent.com/41167139/106721531-c84bc300-662a-11eb-8e4a-d7a4a29ba66b.png)
 
-### `npm run build`
+<a name = "signuplogin"></a>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. ## SignUp/Login Page
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![login-signup](https://user-images.githubusercontent.com/41167139/106722003-6e97c880-662b-11eb-8e30-ae0b89ced651.jpg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<a name = "uploaddownload"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. ## Users can upload single/multiple images and download images by single/multiple labels.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![upload-download](https://user-images.githubusercontent.com/41167139/106723197-ddc1ec80-662c-11eb-81cd-9a0fde85939d.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<a name = "search"></a>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. ## Search images by Label or Date
 
-## Learn More
+![date-label](https://user-images.githubusercontent.com/41167139/106723750-72c4e580-662d-11eb-8a5f-0a5dc918c933.jpg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<a name = "profile"></a>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. ## Profile Page
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![profile](https://user-images.githubusercontent.com/41167139/106725617-9426d100-662f-11eb-88b0-727622c21182.png)
