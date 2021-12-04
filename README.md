@@ -1,6 +1,6 @@
 
-<<<<<<< HEAD
-ImageCat is a website for managing your Images, simplifying the task to sort through your Image Data.<br>
+
+PhotoCat is a website for managing your Images, simplifying the task to sort through your Image Data.<br>
 
 
 ## Table of Contents
