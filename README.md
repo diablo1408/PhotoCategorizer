@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 ImageCat is a website for managing your Images, simplifying the task to sort through your Image Data.<br>
 
 
@@ -40,3 +41,5 @@ ImageCat is a website for managing your Images, simplifying the task to sort thr
 5. ## Profile Page
 
 ![profile](https://user-images.githubusercontent.com/41167139/106725617-9426d100-662f-11eb-88b0-727622c21182.png)
+=======
+>>>>>>> bc3643bca7274bf8fcfa8df36d747d6d98539323
